@@ -1,6 +1,8 @@
 # SuperLink (Social Engineering Tool)
 
-![Code Size](https://img.shields.io/github/languages/code-size/IHosseini083/SuperLink) ![Top Language](https://img.shields.io/github/languages/top/IHosseini083/SuperLink) ![GitHub stars](https://img.shields.io/github/stars/IHosseini083/SuperLink)
+![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.0")
+
+![Code Size](https://img.shields.io/github/languages/code-size/IHosseini083/SuperLink)![GitHub stars](https://img.shields.io/github/stars/IHosseini083/SuperLink)
 
 ## About SuperLink
 
@@ -39,3 +41,24 @@ Do other stuffs without permissions:
 - Redirect to youtube (for password grabber)
 - Smiling moon
 - Weather forcast (for location data)
+
+## Installation & Usage
+
+_Kali Linux / Ubuntu / Parrot OS_:
+
+```
+git clone https://github.com/IHosseini083/SuperLink.git
+cd SuperLink
+sudo ./linux_installer.sh
+python3 SuperLink.py
+```
+
+_Windows_:
+
+- Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
+- Extract the 'SuperLink-main.zip' zip file
+- Open a cmd in the extracted folder
+- Enter 'pip install -r requirements.txt' on cmd
+- Download PHP version 7 from [here](https://windows.php.net/download#php-7.4)
+- Add php.exe to your PC PATH
+- Enter 'python SuperLink.py' on cmd
