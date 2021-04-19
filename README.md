@@ -1,10 +1,8 @@
 # SuperLink (Social Engineering Tool)
 
-![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.0")
+![Code Size](https://img.shields.io/github/languages/code-size/IHosseini083/SuperLink) ![GitHub stars](https://img.shields.io/github/stars/IHosseini083/SuperLink)
 
-![Code Size](https://img.shields.io/github/languages/code-size/IHosseini083/SuperLink)![GitHub stars](https://img.shields.io/github/stars/IHosseini083/SuperLink)
-
-## About SuperLink
+## About SuperLink Version_1.0
 
 SuperLink will host a fake website using PHP server & [Ngrok](https://ngrok.com)
 and generates a link when target opens the generated link, it will
@@ -44,6 +42,16 @@ Do other stuffs without permissions:
 
 ## Installation & Usage
 
+Note!: First of all, go to [ngrok website](https://ngrok.com) and signup,
+then login and go to [here](https://dashboard.ngrok.com/get-started/your-authtoken)
+and copy your ngrok authentication token.
+In the first time that you run the script it will prompt you
+for your ngrok authentication token and your telegram chat id so
+the script can send the generated links to your telegram account
+but you must start the '@BadLinkM_Bot' bot at first so it can
+send you messages.
+you can have your chat id from [here](https://t.me/userinfobot)
+
 _Kali Linux / Ubuntu / Parrot OS_:
 
 ```
@@ -58,7 +66,11 @@ _Windows_:
 - Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
 - Extract the 'SuperLink-main.zip' zip file
 - Open a cmd in the extracted folder
-- Enter 'pip install -r requirements.txt' on cmd
+- Enter 'pip install -r requirements.txt' in cmd
 - Download PHP version 7 from [here](https://windows.php.net/download#php-7.4)
 - Add php.exe to your PC PATH
-- Enter 'python SuperLink.py' on cmd
+- Enter 'python SuperLink.py' in cmd
+
+## Script image
+
+![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.0")
