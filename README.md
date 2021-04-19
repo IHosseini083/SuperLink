@@ -59,22 +59,25 @@ you can have your chat id from [here](https://t.me/userinfobot)
 
 _Kali Linux / Ubuntu / Parrot OS_:
 
-- git clone [https://github.com/IHosseini083/SuperLink.git](https://github.com/IHosseini083/SuperLink.git)
-- cd SuperLink
-- sudo ./linux_installer.sh
-- python3 SuperLink.py
+```
+git clone https://github.com/IHosseini083/SuperLink.git
+cd SuperLink
+sudo ./linux_installer.sh
+python3 SuperLink.py
+```
 
 _Windows_:
 
-- Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
-- Download & install python3.8+ from [here](https://www.python.org/)
-- Extract the 'SuperLink-main.zip' zip file
-- Open a cmd in the extracted folder
-- Enter 'pip install -r requirements.txt' in cmd
-- Download PHP version 7 from [here](https://windows.php.net/download#php-7.4)
-- Add php.exe to your PC PATH
-- Enter 'python SuperLink.py' in cmd
+* Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
+* Download & install python3.8+ from [here](https://www.python.org/)
+* Extract the 'SuperLink-main.zip' zip file
+* Open a cmd in the extracted folder
+* Enter `pip install -r requirements.txt` in cmd
+* Download PHP version 7 from [here](https://windows.php.net/download#php-7.4)
+* Add php.exe to your PC PATH
+* Enter `python SuperLink.py` in cmd
 
-## Script console image
+## Screenshots
 
 ![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.0")
+![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink version 1.0")
