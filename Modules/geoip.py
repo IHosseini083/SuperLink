@@ -4,9 +4,7 @@ from requests import get
 class GeolocationIP:
     def __init__(self, ip_addr):
         self.ip_addr = ip_addr
-        # api key from 'https://ipinfo.io/account'
-        self.api_key = "32bf0de5831372"
-        self.api_url = f"https://ipinfo.io/{self.ip_addr}?token={self.api_key}"
+        self.api_url = f"https://ipinfo.io/{self.ip_addr}"
 
     @property
     def getData(self):
