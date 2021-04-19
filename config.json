@@ -1,0 +1,10 @@
+{
+    "ngrok": {
+        "token": "",
+        "region": "us"
+    },
+    "telegram": {
+        "bot_token": "",
+        "chat_id": ""
+    }
+}

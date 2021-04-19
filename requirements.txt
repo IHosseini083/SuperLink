@@ -1,0 +1,6 @@
+colorama==0.4.4
+neofetch-win==1.1.5.1
+Pillow==8.2.0
+pyngrok==5.0.5
+requests==2.25.1
+win10toast==0.9
