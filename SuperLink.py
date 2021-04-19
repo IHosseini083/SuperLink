@@ -10,6 +10,7 @@ from colorama import Fore, init
 from pyngrok import ngrok
 
 from Modules.checkConfig import CheckConfigFile
+from Modules.checkUpdates import CheckUpdates
 from Modules.clearData import DeleteFilesAndDirs
 from Modules.data2image import Data2Image
 from Modules.editIndexFile import EditIndexFile
@@ -170,6 +171,20 @@ def start():
     cwd = cwdir()
     _del_ = DeleteFilesAndDirs()
     tprint = TMprint()
+    updater = CheckUpdates()
+    print("\n\n")
+    tprint.out(LG + " [>] Checking for new update...")
+    sleep(1)
+    if updater.checkForUpdates is False:
+        tprint.out(LG + " [>] Everything is up-to-date!")
+        sleep(3)
+    elif updater.checkForUpdates is None:
+        tprint.out(LY + " [!] Something went wrong!!!")
+        sleep(3)
+    else:
+        tprint.out(LG + f" [!] There is a new update available! (Version" +
+                   LR + f"{updater.checkForUpdates}" + LG + ")")
+        sleep(5)
     while True:
         try:
             init()

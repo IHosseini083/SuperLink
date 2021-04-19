@@ -40,6 +40,11 @@ Do other stuffs without permissions:
 - Smiling moon
 - Weather forcast (for location data)
 
+## Tested on
+
+- Kali linux (2021)
+- Windows 10
+
 ## Installation & Usage
 
 Note!: First of all, go to [ngrok website](https://ngrok.com) and signup,
@@ -54,16 +59,15 @@ you can have your chat id from [here](https://t.me/userinfobot)
 
 _Kali Linux / Ubuntu / Parrot OS_:
 
-```
-git clone https://github.com/IHosseini083/SuperLink.git
-cd SuperLink
-sudo ./linux_installer.sh
-python3 SuperLink.py
-```
+- git clone [https://github.com/IHosseini083/SuperLink.git]
+- cd SuperLink
+- sudo ./linux_installer.sh
+- python3 SuperLink.py
 
 _Windows_:
 
 - Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
+- Download & install python3.8+ from [here](https://www.python.org/)
 - Extract the 'SuperLink-main.zip' zip file
 - Open a cmd in the extracted folder
 - Enter 'pip install -r requirements.txt' in cmd
@@ -71,6 +75,6 @@ _Windows_:
 - Add php.exe to your PC PATH
 - Enter 'python SuperLink.py' in cmd
 
-## Script image
+## Script console image
 
 ![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.0")
