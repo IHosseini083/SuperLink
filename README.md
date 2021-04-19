@@ -59,7 +59,7 @@ you can have your chat id from [here](https://t.me/userinfobot)
 
 _Kali Linux / Ubuntu / Parrot OS_:
 
-- git clone [https://github.com/IHosseini083/SuperLink.git]
+- git clone [https://github.com/IHosseini083/SuperLink.git](https://github.com/IHosseini083/SuperLink.git)
 - cd SuperLink
 - sudo ./linux_installer.sh
 - python3 SuperLink.py
