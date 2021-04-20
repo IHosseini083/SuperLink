@@ -41,6 +41,7 @@ Do other stuffs without permissions:
 ## Tested on
 
 - Kali linux (2021)
+- Pop! OS (20.04)
 - Windows 10
 
 ## Installation & Usage
@@ -61,7 +62,7 @@ you can have your chat id from [here](https://t.me/userinfobot)
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
 sudo ./linux_installer.sh
-python3 SuperLink.py
+sudo python3 SuperLink.py
 ```
 
 *_Windows_*:
