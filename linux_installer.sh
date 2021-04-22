@@ -16,6 +16,8 @@ echo ' [>] Installing Pyngrok'
 pip3 install pyngrok
 echo ' [>] Installing Pillow'
 pip3 install Pillow
+echo ' [>] Installing Zipfile36'
+pip3 install zipfile36
 echo ' [>] Setting Permissions...'
 chmod 777 Templates
 chmod 777 Logs

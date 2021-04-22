@@ -15,12 +15,17 @@ class CheckUpdates:
             req = get(ver_url).text
             req = loads(req)
             github_ver = req["metadata"]["version"]
+            str_github_ver = str(github_ver).replace(".", "")
+            str_current_ver = str(self.current_version).replace(".", "")
             if github_ver != self.current_version:
-                return github_ver
+                if int(str_github_ver) < int(str_current_ver):
+                    return False
+                else:
+                    return github_ver
             else:
                 return False
         except Exception as error:
-            return None
+            return error
 
     @property
     def get_version(self):
@@ -29,3 +34,6 @@ class CheckUpdates:
             ver = loads(content)
             ver = ver["metadata"]["version"]
             return ver
+
+c = CheckUpdates()
+print(c.checkForUpdates)

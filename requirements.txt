@@ -4,3 +4,4 @@ Pillow==8.2.0
 pyngrok==5.0.5
 requests==2.25.1
 win10toast==0.9
+zipfile36==0.1.3

