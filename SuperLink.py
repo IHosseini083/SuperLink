@@ -313,9 +313,8 @@ class MainServer:
         self.proto = proto
         self.ngrok_auth_token = self.conf_file.loadToken
         self.ngrok_region = self.conf_file.loadRegion
-        self.bot_token = self.conf_file.loadBotToken
         self.user_chat_id = self.conf_file.loadChatId
-        self.telebot = TelegramBot(self.bot_token, self.user_chat_id)
+        self.telebot = TelegramBot(self.user_chat_id)
         self.tprint = TMprint()
         self.time_opt = TimeOptions()
 
