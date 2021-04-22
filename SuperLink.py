@@ -275,14 +275,14 @@ def check_updates():
             banner()
             print("\n\n")
             tprint.out(LG + f" [>] Downloading new version ({updater.checkForUpdates}) ...")
-            up_downloader.download(up_file)
+            up_downloader.download("./" + up_file + ".zip")
             tprint.out(LG + f" [>] Downloaded successfully!")
             sleep(3)
             tprint.out(LG + f" [>] Extracting new update zip file ({up_file})...")
-            up_downloader.extract(up_file, path=f"../{up_file}")
+            up_downloader.extract("./" + up_file + ".zip", path=f"./{up_file}")
             tprint.out(LG + f" [>] Update zip file successfully extractrd in " + 
-                       LW + f"[../{up_file}]")
-            sleep(4)
+                       LW + f"[./{up_file}]")
+            press_enter()
         else:
             pass
 
