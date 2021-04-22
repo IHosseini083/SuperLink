@@ -26,8 +26,6 @@ class CheckConfigFile:
                     self.updateConfigFile("ngrok", {"token": self.get_token})
                 elif self.loadChatId == "":
                     self.updateConfigFile("telegram", {"chat_id": self.get_chat_id})
-                elif self.loadBotToken == "":
-                    self.updateConfigFile("telegram", {"bot_token": self.get_bot_token})
                 elif self.loadRegion == "":
                     self.updateConfigFile("ngrok", {"region": "us"})
                 else:
@@ -106,11 +104,6 @@ class CheckConfigFile:
     def loadChatId(self):
         chat_id = self.loadConfFile("telegram", "chat_id")
         return chat_id
-
-    @property
-    def loadBotToken(self):
-        bot_token = self.loadConfFile("telegram", "bot_token")
-        return bot_token
 
     @property
     def loadRegion(self):
