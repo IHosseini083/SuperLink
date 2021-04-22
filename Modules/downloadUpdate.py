@@ -14,9 +14,9 @@ class GetNewUpdate:
         
     def download(self, filename):
         req = get(self.update_link)
-        with open(f"{filename}.zip", "wb") as f:
+        with open(filename, "wb") as f:
             f.write(req.content)
 
     def extract(self, filename, path):
-        with ZipFile(filename + ".zip", "r") as zip_file:
+        with ZipFile(filename, "r") as zip_file:
             zip_file.extractall(path=path)
