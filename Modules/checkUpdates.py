@@ -34,6 +34,3 @@ class CheckUpdates:
             ver = loads(content)
             ver = ver["metadata"]["version"]
             return ver
-
-c = CheckUpdates()
-print(c.checkForUpdates)
