@@ -267,7 +267,7 @@ def check_updates():
     else:
         tprint.out(LY + f" [!] There is a new update available! (" +
                    LR + f"v{updater.checkForUpdates}" + LY+ ")")
-        up_file = f"SuperLink-v{updater.checkForUpdates}"
+        up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
         select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" + 
                             LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " + 
                             LW + "").lower()
@@ -275,13 +275,17 @@ def check_updates():
             banner()
             print("\n\n")
             tprint.out(LG + f" [>] Downloading new version ({updater.checkForUpdates}) ...")
-            up_downloader.download("./" + up_file + ".zip")
-            tprint.out(LG + f" [>] Downloaded successfully!")
-            sleep(3)
-            tprint.out(LG + f" [>] Extracting new update zip file ({up_file})...")
-            up_downloader.extract("./" + up_file + ".zip", path=f"./{up_file}")
-            tprint.out(LG + f" [>] Update zip file successfully extractrd in " + 
-                       LW + f"[./{up_file}]")
+            try:
+                up_downloader.download(f"../{up_file}")
+                tprint.out(LG + f" [>] Downloaded successfully!")
+                sleep(2)
+                tprint.out(LG + f" [>] Extracting new update file ({up_file})...")
+                sleep(2)
+                up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
+                tprint.out(LG + f" [>] Update file successfully extractrd in " + 
+                        LW + f"[../{up_file}]".replace(".zip", ""))
+            except Exception as error:
+                tprint.out(LR + f" [>] Something went wrong while updating!")
             press_enter()
         else:
             pass
