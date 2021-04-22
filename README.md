@@ -1,6 +1,6 @@
 # SuperLink (Social Engineering Tool)
 
-## About SuperLink Version_1.0
+## About SuperLink-v1.0
 
 SuperLink will host a fake website using PHP server & [Ngrok](https://ngrok.com)
 and generates a link when target opens the generated link, it will
