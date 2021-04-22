@@ -1,6 +1,6 @@
 # SuperLink (Social Engineering Tool)
 
-## About SuperLink-v1.0
+## About SuperLink-v1.1
 
 SuperLink will host a fake website using PHP server & [Ngrok](https://ngrok.com)
 and generates a link when target opens the generated link, it will
@@ -78,6 +78,6 @@ sudo python3 SuperLink.py
 
 ## Screenshots
 
-![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.0")
+![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.1")
 
-![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink version 1.0")
+![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink version 1.1")
