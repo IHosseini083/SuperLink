@@ -66,15 +66,6 @@ class CheckConfigFile:
         else:
             return tg_chat_id
 
-    @property
-    def get_bot_token(self):
-        tg_bot_token = input(Y + "\n [!] Please enter your 'telegram bot token' : " + LW + "")
-        if tg_bot_token == "":
-            print(LR + "\n [!] Bot Token was not received!")
-            exit()
-        else:
-            return tg_bot_token
-
     def create_configfile(self):
         data_dict = {
             "ngrok": {
