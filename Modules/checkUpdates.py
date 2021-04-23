@@ -25,7 +25,7 @@ class CheckUpdates:
             else:
                 return False
         except Exception as error:
-            return error
+            return None
 
     @property
     def get_version(self):
