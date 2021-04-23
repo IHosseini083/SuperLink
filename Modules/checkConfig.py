@@ -22,8 +22,6 @@ class CheckConfigFile:
             else:
                 if self.loadToken == "":
                     self.updateConfigFile("ngrok", {"token": self.get_token})
-                elif len(self.loadToken) < 49:
-                    self.updateConfigFile("ngrok", {"token": self.get_token})
                 elif self.loadChatId == "":
                     self.updateConfigFile("telegram", {"chat_id": self.get_chat_id})
                 elif self.loadRegion == "":
