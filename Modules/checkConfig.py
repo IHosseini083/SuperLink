@@ -73,7 +73,6 @@ class CheckConfigFile:
                 "region": "us"
             },
             "telegram": {
-                "bot_token": self.get_bot_token,
                 "chat_id": self.get_chat_id
             }
         }
