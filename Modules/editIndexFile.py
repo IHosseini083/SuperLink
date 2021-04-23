@@ -1,9 +1,8 @@
 class EditIndexFile:
-    def __init__(self, template_path, audio_link=None, down_link=None, redir_link=None):
+    def __init__(self, template_path, down_link=None, redir_link=None):
         self.template_path = template_path
         self.down_link = down_link
         self.redir_link = redir_link
-        self.audio_link = audio_link
         with open(self.template_path + "/main.html", "r") as mainFile:
             self.main_html_file = mainFile.read()
 
