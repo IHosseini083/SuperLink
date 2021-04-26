@@ -62,8 +62,7 @@ you can have your chat id from [here](https://t.me/userinfobot)
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
 sudo ./linux_installer.sh
------------
-Note!: default port for PHP server & ngrok tunnel is 4545, 
+default port for PHP server & ngrok tunnel is 4545, 
 if you want to use a different one, then:
     - sudo python SuperLink.py -p [PORT]
 otherwise:
@@ -79,7 +78,7 @@ otherwise:
 * Enter `pip install -r requirements.txt` in cmd
 * Download PHP version 7 from [php.net](https://windows.php.net/download#php-7.4)
 * Add php.exe to your PC PATH
-- Note!: default port for PHP server & ngrok tunnel is `4545`, 
+* default port for PHP server & ngrok tunnel is `4545`, 
 if you want to use a different one, then
 Enter `python SuperLink.py -p [PORT]` in cmd
 otherwise
