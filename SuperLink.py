@@ -341,10 +341,10 @@ class MainServer:
         else:
             proto = self.proto
         try:
-            self.tprint.out(LG + " [>] Starting PHP server on port" + LW + f" ({port})")
+            self.tprint.out(LG + " [>] Starting PHP server on port" + LW + f" ({self.def_port})")
             sleep(3)
             with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w") as php_log:
-                Popen(("php", "-S", f"localhost:{port}", "-t", self.template_path), 
+                Popen(("php", "-S", f"localhost:{self.def_port}", "-t", self.template_path),
                       stderr=php_log, stdout=php_log)
                 self.tprint.out(LG + " [>] Generating the link...")
                 link = str(ngrok.connect(self.def_port, proto,
