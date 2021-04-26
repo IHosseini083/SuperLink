@@ -52,10 +52,11 @@ parser.add_argument("-p", "--port",
                     help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
 args = parser.parse_args()
 PORT = args.port
+script_version = "1.2"
+script_title = f"SuperLink - v{script_version} - By IHosseini"
 
 
 def banner():
-    script_title = "SuperLink - v1.1 - By IHosseini"
     TMsettitle(script_title)
     TMcleaner()
     neofetch()
