@@ -18,6 +18,8 @@ echo ' [>] Installing Pillow'
 pip3 install Pillow
 echo ' [>] Installing Zipfile36'
 pip3 install zipfile36
+echo ' [>] Installing Argparse'
+pip3 install argparse
 echo ' [>] Setting Permissions...'
 chmod 777 Templates
 chmod 777 Logs
