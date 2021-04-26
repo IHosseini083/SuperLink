@@ -356,7 +356,7 @@ class MainServer:
                 link = link.replace('"', '')
                 self.tprint.out(LG + " [>] All done!")
                 win10notif("Server started!",
-                           f"PHP & Ngrok server successfully started on port ({port})",
+                           f"PHP & Ngrok server successfully started on port ({self.def_port})",
                            icon=icons_path + "green_check.ico")
                 self.tprint.out(LG + " [>] Template Name : " + LW + template_name)
                 sleep(0.4)
