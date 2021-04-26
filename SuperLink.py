@@ -20,7 +20,6 @@ from Modules.geoip import GeolocationIP
 from Modules.loadTemplates import loadTemplatePath
 from Modules.notifier import TelegramBot
 from Modules.timeOptions import TimeOptions
-from SuperLink import port
 
 LG = Fore.LIGHTGREEN_EX  # light green
 LR = Fore.LIGHTRED_EX  # light red
@@ -47,7 +46,7 @@ else:
     pass
 
 
-parser = ArgumentParser(prog="SuperLink")
+parser = ArgumentParser()
 parser.add_argument("-p", "--port",
                     type=int, default=4545,
                     help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
@@ -314,11 +313,10 @@ class TMprint:
 
 
 class MainServer:
-    def __init__(self, template_path, port=None, proto=None):
+    def __init__(self, template_path, proto=None):
         self.conf_file = CheckConfigFile()
         self.def_port = PORT
         self.def_proto = "http"
-        self.port = port
         self.template_path = template_path
         self.proto = proto
         self.ngrok_auth_token = self.conf_file.loadToken
