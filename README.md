@@ -62,20 +62,28 @@ you can have your chat id from [here](https://t.me/userinfobot)
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
 sudo ./linux_installer.sh
-sudo python3 SuperLink.py
+-----------
+Note!: default port for PHP server & ngrok tunnel is `4545`, 
+if you want to use a different one, then:
+    - sudo python SuperLink.py -p [PORT]
+otherwise:
+    - sudo python3 SuperLink.py
 ```
 
 *_Windows_*:
 
-- Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
-- Download & install python3.8+ from [here](https://www.python.org/)
-- Extract the 'SuperLink-main.zip' zip file
-- Open a cmd in the extracted folder
-- Enter `pip install -r requirements.txt` in cmd
-- Download PHP version 7 from [here](https://windows.php.net/download#php-7.4)
-- Add php.exe to your PC PATH
-- Enter `python SuperLink.py` in cmd
-
+* Download [this repository](https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip)
+* Download & install python3.8+ from [python.org](https://www.python.org/)
+* Extract the 'SuperLink-main.zip' zip file
+* Open a cmd in the extracted folder
+* Enter `pip install -r requirements.txt` in cmd
+* Download PHP version 7 from [php.net](https://windows.php.net/download#php-7.4)
+* Add php.exe to your PC PATH
+- Note!: default port for PHP server & ngrok tunnel is `4545`, 
+if you want to use a different one, then:
+    -- Enter `python SuperLink.py -p [PORT]` in cmd
+otherwise:
+    -- Enter `python SuperLink.py` in cmd
 ## Screenshots
 
 ![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.1")
