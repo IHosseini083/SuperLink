@@ -63,7 +63,7 @@ def banner():
 
 
 def check_py_version():
-    py_version = version.split(" ")[0].replace(".", "")
+    py_version = version.split(" ")[0].replace(".", "").replace("+", "")
     if int(py_version) < 380:
         print("\n\n" + LR + " [!] This script requires Python version 3.8+ to run!")
         exit()
