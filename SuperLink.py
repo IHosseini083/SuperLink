@@ -53,7 +53,7 @@ parser.add_argument("-p", "--port",
 args = parser.parse_args()
 PORT = args.port
 script_version = "1.2"
-script_title = f"SuperLink - v{script_version} - By IHosseini"
+script_title = f"SuperLink  v{script_version}  By IHosseini"
 
 
 def banner():
@@ -63,9 +63,9 @@ def banner():
 
 
 def check_py_version():
-    py_version = version.split(" ")[0].replace(".", "")
+    py_version = version.split(" ")[0].replace(".", "").replace("+", "")
     if int(py_version) < 380:
-        print("\n\n" + LR + " [!] This script requires Python version 3.8+ to run!")
+        print("\n\n" + LR + " [!] This script requires at least Python version 3.8 to run!")
         exit()
     else:
         pass
