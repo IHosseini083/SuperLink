@@ -61,7 +61,7 @@ you can have your chat id from [here](https://t.me/userinfobot)
 ```bash
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
-sudo ./linux_installer.sh
+sudo ./linux_installer
 default port for PHP server & ngrok tunnel is 4545, 
 if you want to use a different one, then:
     - sudo python SuperLink.py -p [PORT]
