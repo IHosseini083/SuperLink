@@ -201,8 +201,8 @@ def start():
             makedirs()
             home_options()
             opt = str(input("\n" + LG + " ┌─(" + LC + f"{username}" + LR + "@" +
-                            LC + "SuperLink" + LG + ")─[" + LC + f"./{cwd}" + LG + "]" + """
- └──╼/# """ + LW + ""))
+                            LC + "SuperLink" + LG + ")─[" + LC + f"~/{cwd}" + LG + "]" + """
+ └──╼/$ """ + LW + ""))
             temps = loadTemplatePath()
             if opt == "":
                 continue
