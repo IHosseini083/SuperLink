@@ -80,7 +80,7 @@ otherwise:
 * Add php.exe to your PC PATH
 * default port for PHP server & ngrok tunnel is `4545`, 
 if you want to use a different one, then
-Enter `python SuperLink.py -p [PORT]` in cmd
+Enter `python SuperLink.py -p PORT` in cmd
 otherwise
 Enter `python SuperLink.py` in cmd
 ## Screenshots
