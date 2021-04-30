@@ -1,10 +1,40 @@
+from shutil import which
+from subprocess import Popen, check_output
+from sys import exit, version
+
+
+def check_dependency():
+    tprint = TMprint()
+    print("\n")
+    tprint.out(" [#] Checking dependencies... ")
+    main_pkgs = ['requests', 'colorama',
+                 'argparse', 'pyngrok', 'Pillow',
+                 'zipfile36']
+    if name == "nt":
+        main_pkgs.extend(["neofetch-win", "win10toast"])
+        pip = "pip"
+    else:
+        pip = "pip3"
+    for pkg in main_pkgs:
+        lib_info = str(check_output(f'{pip} show {pkg}'))
+        if "not found" not in lib_info:
+            pass
+        else:
+            tprint.out(f" [!] '{pkg}' is not installed!")
+            exit()
+    does_php_exist = which('php')
+    if does_php_exist is None:
+            tprint.out(f" [!] 'php' is not installed!")
+            exit()
+    else:
+        pass
+
+
 from argparse import ArgumentParser
 from json import loads
 from os import getcwd, getlogin, listdir, name, stat, system
 from pathlib import Path
 from platform import uname
-from subprocess import Popen
-from sys import exit, version
 from time import sleep
 
 from colorama import Fore, init
@@ -21,6 +51,11 @@ from Modules.loadTemplates import loadTemplatePath
 from Modules.notifier import TelegramBot
 from Modules.timeOptions import TimeOptions
 
+if name == "nt":
+    from win10toast import ToastNotifier
+else:
+    pass
+
 LG = Fore.LIGHTGREEN_EX  # light green
 LR = Fore.LIGHTRED_EX  # light red
 LY = Fore.LIGHTYELLOW_EX  # light yellow
@@ -28,23 +63,6 @@ LW = Fore.LIGHTWHITE_EX  # light white
 LC = Fore.LIGHTCYAN_EX  # light cyan
 LB = Fore.LIGHTBLUE_EX  # light blue
 Y = Fore.YELLOW  # yellow
-
-if name == "nt":
-    try:
-        from win10toast import ToastNotifier
-    except ModuleNotFoundError:
-        print(LR + " [!] 'win10toast' is not installed! " + 
-              LW + "| " + LR + "Installation: pip install win10toast==0.9")
-        exit()
-    try:
-        import neofetch_win
-    except ModuleNotFoundError:
-        print(LR + " [!] 'neofetch-win' is not installed! " + 
-              LW + "| " + LR + "Installation: pip install neofetch-win==1.1.5.1")
-        exit()
-else:
-    pass
-
 
 parser = ArgumentParser()
 parser.add_argument("-p", "--port",
@@ -69,8 +87,8 @@ def check_py_version():
         exit()
     else:
         pass
-
-
+    
+    
 def win10notif(
         title: str,
         msg: str,
@@ -270,13 +288,20 @@ def check_updates():
     tprint.out(LG + " [>] Checking for new update...")
     if updater.checkForUpdates is False:
         tprint.out(LG + " [>] Everything is up-to-date!")
-        sleep(3)
+        win10notif("Up-To-Date!", 
+                   "Everything has been checked and there is not any new update!",
+                   icon="./Modules/icons/green_check.ico", duration=3)
     elif updater.checkForUpdates is None:
         tprint.out(LY + " [!] Something went wrong!!!")
-        sleep(3)
+        win10notif("Something went wrong!",
+                   "Something unknown happend while checking for new update!\nplease check your network connection.",
+                   icon="./Modules/icons/red_cross.ico", duration=3)
     else:
         tprint.out(LY + f" [!] There is a new update available! (" +
                    LR + f"v{updater.checkForUpdates}" + LY+ ")")
+        win10notif("New update available!",
+                   f"A new update realesed on github by the author (IHosseini)\nnew version: {updater.checkForUpdates}",
+                   icon="./Modules/icons/exclamation_mark.ico", duration=3)
         up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
         select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" + 
                             LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " + 
@@ -288,7 +313,9 @@ def check_updates():
             try:
                 up_downloader.download(f"../{up_file}")
                 tprint.out(LG + f" [>] Downloaded successfully!")
-                sleep(2)
+                win10notif("Update files downloaded!",
+                           "New update files successfully downloaded and gonna be extracted soon!",
+                           icon="./Modules/icons/download_folder.ico", duration=3)                
                 tprint.out(LG + f" [>] Extracting new update file ({up_file})...")
                 sleep(2)
                 up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
@@ -546,5 +573,6 @@ def implement_userdata(info_data: dict, ip_data: dict):
 
 
 if __name__ == "__main__":
+    check_dependency()
     check_py_version()
     start()
