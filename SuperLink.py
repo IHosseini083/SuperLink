@@ -290,18 +290,18 @@ def check_updates():
         tprint.out(LG + " [>] Everything is up-to-date!")
         win10notif("Up-To-Date!", 
                    "Everything has been checked and there is not any new update!",
-                   icon="./Modules/icons/green_check.ico", duration=3)
+                   icon="./Modules/icons/green_check.ico")
     elif updater.checkForUpdates is None:
         tprint.out(LY + " [!] Something went wrong!!!")
         win10notif("Something went wrong!",
                    "Something unknown happend while checking for new update!\nplease check your network connection.",
-                   icon="./Modules/icons/red_cross.ico", duration=3)
+                   icon="./Modules/icons/red_cross.ico")
     else:
         tprint.out(LY + f" [!] There is a new update available! (" +
                    LR + f"v{updater.checkForUpdates}" + LY+ ")")
         win10notif("New update available!",
                    f"A new update realesed on github by the author (IHosseini)\nnew version: {updater.checkForUpdates}",
-                   icon="./Modules/icons/exclamation_mark.ico", duration=3)
+                   icon="./Modules/icons/exclamation_mark.ico")
         up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
         select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" + 
                             LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " + 
@@ -315,7 +315,7 @@ def check_updates():
                 tprint.out(LG + f" [>] Downloaded successfully!")
                 win10notif("Update files downloaded!",
                            "New update files successfully downloaded and gonna be extracted soon!",
-                           icon="./Modules/icons/download_folder.ico", duration=3)                
+                           icon="./Modules/icons/download_folder.ico")                
                 tprint.out(LG + f" [>] Extracting new update file ({up_file})...")
                 sleep(2)
                 up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
