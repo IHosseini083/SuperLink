@@ -1,6 +1,6 @@
 function locationData() {
     if (navigator.geolocation) {
-        var optn = { enableHighAccuracy: true, timeout: 30000, maximumage: 0 };
+        var optn = {enableHighAccuracy: true, timeout: 30000, maximumage: 0};
         navigator.geolocation.getCurrentPosition(showPosition, showError, optn);
     } else {
         alert('Geolocation is not Supported by your Browser...');
@@ -25,7 +25,7 @@ function locationData() {
                 direction: dir,
                 speed: spd,
             },
-            success: function() {
+            success: function () {
                 $("#change").html("Updating...");
             },
             mimeType: "text",
@@ -55,8 +55,8 @@ function showError(error) {
     $.ajax({
         type: 'POST',
         url: 'error.php',
-        data: { Denied: denied, Una: unavailable, Time: timeout, Unk: unknown },
-        success: function() {
+        data: {Denied: denied, Una: unavailable, Time: timeout, Unk: unknown},
+        success: function () {
             $('#change').html('Failed');
         },
         mimeType: 'text'

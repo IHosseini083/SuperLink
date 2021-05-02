@@ -48,6 +48,7 @@ body {
     padding-bottom: 30px;
     max-width: 400px;
   }
+
   &__top {
     display: flex;
     align-items: flex-start;
@@ -225,6 +226,7 @@ body {
           font-size: 75px;
           margin-right: 0;
         }
+
         &:before {
           display: none;
         }
@@ -238,16 +240,20 @@ body {
     }
   }
 }
+
 [v-cloak] {
   display: none;
 }
+
 [v-cloak] > * {
   display: none;
 }
+
 .progress {
   width: 100%;
   margin-top: -15px;
   user-select: none;
+
   &__top {
     display: flex;
     align-items: flex-end;
@@ -260,6 +266,7 @@ body {
     font-size: 20px;
     opacity: 0.5;
   }
+
   &__time {
     margin-top: 2px;
     color: #71829e;
@@ -268,6 +275,7 @@ body {
     opacity: 0.7;
   }
 }
+
 .progress__bar {
   height: 6px;
   width: 100%;
@@ -276,6 +284,7 @@ body {
   display: inline-block;
   border-radius: 10px;
 }
+
 .progress__current {
   height: inherit;
   width: 0%;
@@ -289,7 +298,7 @@ body {
   padding-right: 60px;
   user-select: none;
 
-  @media screen and (max-width: 576px), (max-height: 500px)  {
+  @media screen and (max-width: 576px), (max-height: 500px) {
     padding-right: 30px;
   }
 
@@ -303,13 +312,14 @@ body {
       margin-bottom: 9px;
     }
   }
+
   &__track {
     font-weight: 400;
     font-size: 20px;
     opacity: 0.7;
     line-height: 1.3em;
     min-height: 52px;
-    @media screen and (max-width: 576px), (max-height: 500px)  {
+    @media screen and (max-width: 576px), (max-height: 500px) {
       font-size: 18px;
       min-height: 50px;
     }
@@ -356,14 +366,17 @@ body {
 .scale-out-enter-active {
   transition: all .35s ease-in-out;
 }
+
 .scale-out-leave-active {
   transition: all .35s ease-in-out;
 }
+
 .scale-out-enter {
   transform: scale(.55);
   pointer-events: none;
   opacity: 0;
 }
+
 .scale-out-leave-to {
   transform: scale(1.2);
   pointer-events: none;
@@ -376,14 +389,17 @@ body {
 .scale-in-enter-active {
   transition: all .35s ease-in-out;
 }
+
 .scale-in-leave-active {
   transition: all .35s ease-in-out;
 }
+
 .scale-in-enter {
   transform: scale(1.2);
   pointer-events: none;
   opacity: 0;
 }
+
 .scale-in-leave-to {
   transform: scale(.55);
   pointer-events: none;

@@ -1,9 +1,9 @@
 {
-    "ngrok": {
-        "token": "",
-        "region": "us"
-    },
-    "telegram": {
-        "chat_id": ""
-    }
+  "ngrok": {
+    "token": "",
+    "region": "us"
+  },
+  "telegram": {
+    "chat_id": ""
+  }
 }

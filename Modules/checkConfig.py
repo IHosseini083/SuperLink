@@ -42,7 +42,7 @@ class CheckConfigFile:
             jdata[index].update(new_config)
         with open(self.config_file, "w") as cfile:
             cfile.write(dumps(jdata))
-            
+
     @property
     def get_token(self):
         token = input(Y + "\n [!] Please enter your 'ngrok authentication token' : " + LW + "")

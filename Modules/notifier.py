@@ -7,6 +7,7 @@ class TelegramBot:
     to your telegram account through an already created \n
     telegram bot.
     """
+
     def __init__(self, chat_id: str):
         # Telegram bot token thta botfather gives us.
         self.__bot_token = "1620940668:AAHakvg1EsJtQdG9qxmPIIOx1QVjvFLAfek"

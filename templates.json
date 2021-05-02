@@ -1,24 +1,24 @@
 {
-    "templates": {
-        "0": {
-            "name": "Music Player",
-            "path": "./Templates/Music Player"
-        },
-        "1": {
-            "name": "Smiling Moon",
-            "path": "./Templates/Smiling Moon"
-        },
-        "2": {
-            "name": "Camera (Webcam access)",
-            "path": "./Templates/Camera (Webcam access)"
-        },
-        "3": {
-            "name": "Password grabber (win10)",
-            "path": "./Templates/Password grabber (Win10)"
-        },
-        "4": {
-            "name": "Weather forcast",
-            "path": "./Templates/Weather forcast"
-        }
+  "templates": {
+    "0": {
+      "name": "Music Player",
+      "path": "./Templates/Music Player"
+    },
+    "1": {
+      "name": "Smiling Moon",
+      "path": "./Templates/Smiling Moon"
+    },
+    "2": {
+      "name": "Camera (Webcam access)",
+      "path": "./Templates/Camera (Webcam access)"
+    },
+    "3": {
+      "name": "Password grabber (win10)",
+      "path": "./Templates/Password grabber (Win10)"
+    },
+    "4": {
+      "name": "Weather forcast",
+      "path": "./Templates/Weather forcast"
     }
+  }
 }

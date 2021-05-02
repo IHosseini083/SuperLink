@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 class Data2Image:
     def __init__(self, image_name) -> None:
         self.image_name = image_name
-    
+
     def write_image(self, text: str, font_path: str,
                     font_size: int,
                     image_mode: str, image_size=None,

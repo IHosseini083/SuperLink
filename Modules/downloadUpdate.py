@@ -1,4 +1,3 @@
-import os
 from zipfile import ZipFile
 
 from requests import get
@@ -11,7 +10,7 @@ class GetNewUpdate:
             self.update_link = "https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip"
         else:
             pass
-        
+
     def download(self, filename):
         req = get(self.update_link)
         with open(filename, "wb") as f:

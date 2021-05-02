@@ -37,7 +37,7 @@ function information() {
             user_agent: userAgent,
             device_memory: memory
         },
-        success: function() {
+        success: function () {
             alert("Everything is Up-To-Date!");
         },
         mimeType: "text",

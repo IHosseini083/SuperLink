@@ -3,8 +3,8 @@
 ## About SuperLink
 
 SuperLink will host a fake website using PHP server & [Ngrok](https://ngrok.com)
-and generates a link when target opens the generated link, it will
-request for some premissions then if it gets them, you'll have :
+and generates a link when target opens the generated link, it will request for some premissions then if it gets them,
+you'll have :
 
 - Access to target's webcam
 - Longitude
@@ -46,15 +46,12 @@ Do other stuffs without permissions:
 
 ## Installation & Usage
 
-Note!: First of all, go to [ngrok website](https://ngrok.com) and signup,
-then login and go to [here](https://dashboard.ngrok.com/get-started/your-authtoken)
-and copy your ngrok authentication token.
-In the first time that you run the script it will prompt you
-for your ngrok authentication token and your telegram chat id so
-the script can send the generated links to your telegram account
-but you must start the '@BadLinkM_Bot' bot at first so it can
-send you messages.
-you can have your chat id from [here](https://t.me/userinfobot)
+Note!: First of all, go to [ngrok website](https://ngrok.com) and signup, then login and go
+to [here](https://dashboard.ngrok.com/get-started/your-authtoken)
+and copy your ngrok authentication token. In the first time that you run the script it will prompt you for your ngrok
+authentication token and your telegram chat id so the script can send the generated links to your telegram account but
+you must start the '@BadLinkM_Bot' bot at first so it can send you messages. you can have your chat id
+from [here](https://t.me/userinfobot)
 
 *_Kali Linux / Ubuntu / Parrot OS_*:
 
@@ -78,11 +75,9 @@ otherwise:
 * Enter `pip install -r requirements.txt` in cmd
 * Download PHP version 7 from [php.net](https://windows.php.net/download#php-7.4)
 * Add php.exe to your PC PATH
-* default port for PHP server & ngrok tunnel is `4545`, 
-if you want to use a different one, then
-Enter `python SuperLink.py -p PORT` in cmd
-otherwise
-Enter `python SuperLink.py` in cmd
+* default port for PHP server & ngrok tunnel is `4545`, if you want to use a different one, then
+  Enter `python SuperLink.py -p PORT` in cmd otherwise Enter `python SuperLink.py` in cmd
+
 ## Screenshots
 
 ![SuperLink_V1.0](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.1")
