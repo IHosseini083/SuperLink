@@ -124,3 +124,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .vscode/PythonImportHelper-v2-Completion.json
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/SuperLink (Github).iml
+/.idea/vcs.xml
