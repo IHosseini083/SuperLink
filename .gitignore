@@ -131,3 +131,4 @@ dmypy.json
 /.idea/vcs.xml
 .idea/.gitignore
 /.idea/workspace.xml
+.idea/SuperLink.iml
