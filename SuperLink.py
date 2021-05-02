@@ -70,7 +70,7 @@ parser.add_argument("-p", "--port",
                     help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
 args = parser.parse_args()
 PORT = args.port
-script_version = "1.2"
+script_version = "1.3"
 script_title = f"SuperLink  v{script_version}  By IHosseini"
 
 
