@@ -129,3 +129,4 @@ dmypy.json
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/SuperLink (Github).iml
 /.idea/vcs.xml
+.idea/.gitignore
