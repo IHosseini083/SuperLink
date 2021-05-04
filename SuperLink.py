@@ -1,40 +1,11 @@
-from shutil import which
-from subprocess import Popen, check_output
-from sys import exit, version
-
-
-def check_dependency():
-    t_print = TmPrint()
-    print("\n")
-    t_print.out(" [#] Checking dependencies... ")
-    main_pkg_list = ['requests', 'colorama',
-                     'argparse', 'pyngrok', 'Pillow',
-                     'zipfile36']
-    pip = "pip"
-    if name == "nt":
-        main_pkg_list.extend(["neofetch-win", "win10toast"])
-    else:
-        pass
-    for pkg in main_pkg_list:
-        lib_info = str(check_output(f'{pip} show {pkg}'))
-        if "not found" not in lib_info:
-            pass
-        else:
-            t_print.out(f" [!] '{pkg}' is not installed!")
-            exit()
-    does_php_exist = which('php')
-    if does_php_exist is None:
-        t_print.out(f" [!] 'php' is not installed!")
-        exit()
-    else:
-        pass
-
-
 from argparse import ArgumentParser
 from json import loads
 from os import getcwd, getlogin, listdir, name, stat, system
 from pathlib import Path
 from platform import uname
+from shutil import which
+from subprocess import Popen, check_output
+from sys import exit, version
 from time import sleep
 
 from colorama import Fore, init
@@ -567,6 +538,5 @@ def implement_userdata(info_data: dict, ip_data: dict):
 
 
 if __name__ == "__main__":
-    check_dependency()
     check_py_version()
     start()

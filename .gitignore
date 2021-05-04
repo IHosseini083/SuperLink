@@ -132,3 +132,4 @@ dmypy.json
 .idea/.gitignore
 /.idea/workspace.xml
 .idea/SuperLink.iml
+.vscode/settings.json
