@@ -9,19 +9,19 @@ class TelegramBot:
     """
 
     def __init__(self, chat_id: str):
-        # Telegram bot token thta botfather gives us.
+        # Telegram bot token that @botfather gives us.
         self.__bot_token = "1620940668:AAHakvg1EsJtQdG9qxmPIIOx1QVjvFLAfek"
         # Your telegram chat id. you can have it at '@userinfobot' in telegram.
         self.__chat_id = chat_id
         # HttpDebugger webpage url that we're gonna send a request to
         # so it delivers our data to telegram bot.
-        self.httpdebugger_url = "https://www.httpdebugger.com/Tools/ViewHttpHeaders.aspx"
+        self.http_debugger_url = "https://www.httpdebugger.com/Tools/ViewHttpHeaders.aspx"
         # Telegram HTTPS url api to send different requests
         self.telegram_api_url = f"https://api.telegram.org/bot{self.__bot_token}/"
 
     # __getter__ method for chat_id
     @property
-    def getChatId(self):
+    def get_chat_id(self):
         """
         Returns chat_id.
         """

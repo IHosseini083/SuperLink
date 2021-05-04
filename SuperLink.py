@@ -256,29 +256,29 @@ def check_updates():
     banner()
     print("\n\n")
     t_print.out(LG + " [>] Checking for new update...")
-    if updater.checkForUpdates is False:
+    if updater.check_for_updates is False:
         t_print.out(LG + " [>] Everything is up-to-date!")
         win10_notify("Up-To-Date!", "Everything has been checked and there is not any new update!",
                      icon="./Modules/icons/green_check.ico")
-    elif updater.checkForUpdates is None:
+    elif updater.check_for_updates is None:
         t_print.out(LY + " [!] Something went wrong!!!")
         win10_notify("Something went wrong!",
                      "Something unknown happened while checking for new update!\nplease check your network connection.",
                      icon="./Modules/icons/red_cross.ico")
     else:
         t_print.out(LY + f" [!] There is a new update available! (" +
-                    LR + f"v{updater.checkForUpdates}" + LY + ")")
+                    LR + f"v{updater.check_for_updates}" + LY + ")")
         win10_notify("New update available!",
-                     f"A new update released on github by the author\nnew version: {updater.checkForUpdates}",
+                     f"A new update released on github by the author\nnew version: {updater.check_for_updates}",
                      icon="./Modules/icons/exclamation_mark.ico")
-        up_file = f"SuperLink-v{updater.checkForUpdates}.zip"
+        up_file = f"SuperLink-v{updater.check_for_updates}.zip"
         select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
-                            LB + f" Do you want to download the new version ({updater.checkForUpdates}) ? [y/n] " +
+                            LB + f" Do you want to download the new version ({updater.check_for_updates}) ? [y/n] " +
                             LW + "").lower()
         if select_down == "y" or select_down == "yes":
             banner()
             print("\n\n")
-            t_print.out(LG + f" [>] Downloading new version ({updater.checkForUpdates}) ...")
+            t_print.out(LG + f" [>] Downloading new version ({updater.check_for_updates}) ...")
             try:
                 up_downloader.download(f"../{up_file}")
                 t_print.out(LG + f" [>] Downloaded successfully!")
@@ -316,9 +316,9 @@ class MainServer:
         self.def_proto = "http"
         self.template_path = template_path
         self.proto = proto
-        self.ngrok_auth_token = self.conf_file.loadToken
-        self.ngrok_region = self.conf_file.loadRegion
-        self.user_chat_id = self.conf_file.loadChatId
+        self.ngrok_auth_token = self.conf_file.load_token
+        self.ngrok_region = self.conf_file.load_region
+        self.user_chat_id = self.conf_file.load_chat_id
         self.telebot = TelegramBot(self.user_chat_id)
         self.t_print = TmPrint()
         self.time_opt = TimeOptions()

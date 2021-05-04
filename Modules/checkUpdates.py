@@ -9,7 +9,7 @@ class CheckUpdates:
         self.current_version = self.get_version
 
     @property
-    def checkForUpdates(self):
+    def check_for_updates(self):
         try:
             ver_url = "https://raw.githubusercontent.com/IHosseini083/SuperLink/main/metadata.json"
             req = get(ver_url).text

@@ -22,26 +22,28 @@ class CheckConfigFile:
             else:
                 if self.loadToken == "":
                     self.updateConfigFile("ngrok", {"token": self.get_token})
-                elif self.loadChatId == "":
-                    self.updateConfigFile("telegram", {"chat_id": self.get_chat_id})
-                elif self.loadRegion == "":
-                    self.updateConfigFile("ngrok", {"region": "us"})
                 else:
-                    pass
+                    if self.loadChatId == "":
+                        self.updateConfigFile("telegram", {"chat_id": self.get_chat_id})
+                    else:
+                        if self.loadRegion == "":
+                            self.updateConfigFile("ngrok", {"region": "us"})
+                        else:
+                            pass
         else:
             self.create_configfile()
 
-    def loadConfFile(self, index: str, property: str):
-        with open(self.config_file, "r") as cfile:
-            jdata = loads(cfile.read())[index][property]
-        return jdata
+    def load_conf_file(self, index: str, p: str):
+        with open(self.config_file, "r") as file:
+            data = loads(file.read())[index][p]
+        return data
 
-    def updateConfigFile(self, index: str, new_config: dict):
-        with open(self.config_file, "r") as cfile:
-            jdata = loads(cfile.read())
-            jdata[index].update(new_config)
-        with open(self.config_file, "w") as cfile:
-            cfile.write(dumps(jdata))
+    def update_config_file(self, index: str, new_config: dict):
+        with open(self.config_file, "r") as file:
+            data = loads(file.read())
+            data[index].update(new_config)
+        with open(self.config_file, "w") as file:
+            file.write(dumps(data))
 
     @property
     def get_token(self):
@@ -74,26 +76,21 @@ class CheckConfigFile:
                 "chat_id": self.get_chat_id
             }
         }
-        with open(self.config_file, "w") as cfile:
-            jdata = dumps(data_dict)
-            cfile.write(jdata)
+        with open(self.config_file, "w") as file:
+            data = dumps(data_dict)
+            file.write(data)
 
     @property
-    def loadToken(self):
+    def load_token(self):
         token = self.loadConfFile("ngrok", "token")
         return token
 
     @property
-    def loadRegion(self):
-        region = self.loadConfFile("ngrok", "region")
-        return region
-
-    @property
-    def loadChatId(self):
+    def load_chat_id(self):
         chat_id = self.loadConfFile("telegram", "chat_id")
         return chat_id
 
     @property
-    def loadRegion(self):
+    def load_region(self):
         region = self.loadConfFile("ngrok", "region")
         return region
