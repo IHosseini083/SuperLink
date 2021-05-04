@@ -10,11 +10,11 @@ def check_dependency():
     main_pkg_list = ['requests', 'colorama',
                      'argparse', 'pyngrok', 'Pillow',
                      'zipfile36']
+    pip = "pip"
     if name == "nt":
         main_pkg_list.extend(["neofetch-win", "win10toast"])
-        pip = "pip"
     else:
-        pip = "pip3"
+        pass
     for pkg in main_pkg_list:
         lib_info = str(check_output(f'{pip} show {pkg}'))
         if "not found" not in lib_info:
