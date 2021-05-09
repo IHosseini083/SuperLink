@@ -50,7 +50,7 @@ Note!: First, go to [ngrok website](https://ngrok.com) and signup, then login an
 to [here](https://dashboard.ngrok.com/get-started/your-authtoken)
 and copy your ngrok authentication token. In the first time that you run the script it will prompt you for your ngrok
 authentication token, and your telegram chat id, so the script can send the generated links to your telegram account,
-but you must start the `@BadLinkM_Bot` bot at first, so it can send you messages. you can have your chat id
+but you must start the [@SuperLink_Delivery_Bot](http://t.me/SuperLink_Delivery_Bot) bot at first, so it can send you messages. you can have your chat id
 from [here](https://t.me/userinfobot).
 
 **Kali Linux / Ubuntu / Parrot OS**:
