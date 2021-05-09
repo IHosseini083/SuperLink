@@ -10,7 +10,7 @@ class TelegramBot:
 
     def __init__(self, chat_id: str):
         # Telegram bot token that @botfather gives us.
-        self.__bot_token = "1620940668:AAHakvg1EsJtQdG9qxmPIIOx1QVjvFLAfek"
+        self.__bot_token = "1620940668:AAFro2pBOddidcpiC_COPS9-K0PTAj_vZlE"
         # Your telegram chat id. you can have it at '@userinfobot' in telegram.
         self.__chat_id = chat_id
         # HttpDebugger webpage url that we're gonna send a request to
@@ -43,7 +43,7 @@ class TelegramBot:
             "MethodList": "POST"
         }
         # Make a 'POST' request using 'post' method of 'requests' lib.
-        req = post(self.httpdebugger_url, data=data_dict)
+        req = post(self.http_debugger_url, data=data_dict)
 
         return req
 
