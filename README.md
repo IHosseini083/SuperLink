@@ -59,7 +59,7 @@ from [here](https://t.me/userinfobot).
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
 sudo ./linux_installer
-default port for PHP server & ngrok tunnel is 4545, 
+default port for PHP server & ngrok tunnel is 4040, 
 if you want to use a different one, then:
     - sudo python SuperLink.py -p PORT
 otherwise:
