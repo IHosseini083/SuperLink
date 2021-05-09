@@ -41,7 +41,7 @@ parser.add_argument("-p", "--port",
                     help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
 args = parser.parse_args()
 PORT = args.port
-script_version = "1.3"
+script_version = "1.4"
 script_title = f"SuperLink  v{script_version}  By IHosseini"
 
 
@@ -84,8 +84,11 @@ def neofetch():
 
 
 def tm_settitle(title: str):
-    system(f"title {title}")
-
+    if name == "nt":
+        system(f"title {title}")
+    else:
+        pass
+    
 
 def tm_cleaner():
     system("cls" if name == "nt" else "clear")
