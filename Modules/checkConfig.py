@@ -20,14 +20,14 @@ class CheckConfigFile:
             if stat(self.config_file).st_size == 0:
                 self.create_configfile()
             else:
-                if self.loadToken == "":
-                    self.updateConfigFile("ngrok", {"token": self.get_token})
+                if self.load_token == "":
+                    self.update_config_file("ngrok", {"token": self.get_token})
                 else:
-                    if self.loadChatId == "":
-                        self.updateConfigFile("telegram", {"chat_id": self.get_chat_id})
+                    if self.load_chat_id == "":
+                        self.update_config_file("telegram", {"chat_id": self.get_chat_id})
                     else:
-                        if self.loadRegion == "":
-                            self.updateConfigFile("ngrok", {"region": "us"})
+                        if self.load_region == "":
+                            self.update_config_file("ngrok", {"region": "us"})
                         else:
                             pass
         else:
@@ -82,15 +82,15 @@ class CheckConfigFile:
 
     @property
     def load_token(self):
-        token = self.loadConfFile("ngrok", "token")
+        token = self.load_conf_file("ngrok", "token")
         return token
 
     @property
     def load_chat_id(self):
-        chat_id = self.loadConfFile("telegram", "chat_id")
+        chat_id = self.load_conf_file("telegram", "chat_id")
         return chat_id
 
     @property
     def load_region(self):
-        region = self.loadConfFile("ngrok", "region")
+        region = self.load_conf_file("ngrok", "region")
         return region
