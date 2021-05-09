@@ -9,7 +9,7 @@ from sys import exit, version
 from time import sleep
 
 from colorama import Fore, init
-from pyngrok import ngrok
+from pyngrok import conf, ngrok
 
 from Modules.checkConfig import CheckConfigFile
 from Modules.checkUpdates import CheckUpdates
@@ -37,7 +37,7 @@ Y = Fore.YELLOW  # yellow
 
 parser = ArgumentParser()
 parser.add_argument("-p", "--port",
-                    type=int, default=4545,
+                    type=int, default=4040,
                     help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
 args = parser.parse_args()
 PORT = args.port
@@ -328,28 +328,26 @@ class MainServer:
         icons_path = "./Modules/icons/"
         print("\n\n")
         self.t_print.out(LG + " [>] Processing...")
-        sleep(3)
+        sleep(1)
         template_name = self.template_path.split("/")[2]
         self.t_print.out(LG + " [>] Checking port & protocol...")
-        sleep(3)
+        sleep(1)
         if self.proto is None:
             proto = self.def_proto
         else:
             proto = self.proto
         try:
             self.t_print.out(LG + " [>] Starting PHP server on port" + LW + f" ({self.def_port})")
-            sleep(3)
+            sleep(1)
             with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w") as php_log:
                 Popen(("php", "-S", f"localhost:{self.def_port}", "-t", self.template_path),
                       stderr=php_log, stdout=php_log)
                 self.t_print.out(LG + " [>] Generating the link...")
-                link = str(ngrok.connect(self.def_port, proto,
-                                         region=self.ngrok_region,
-                                         auth_token=self.ngrok_auth_token))
-                local_mode = link.split(" ")[3].replace('"', '')
-                link = link.replace("http", "https")
-                link = link.split(" ")[1]
-                link = link.replace('"', '')
+                conf.get_default().region = self.ngrok_region
+                conf.get_default().auth_token = self.ngrok_auth_token
+                link = ngrok.connect(self.def_port, proto).public_url
+                link = str(link).replace("http://", "https://")
+                local_mode = f"http://localhost:{self.def_port}"
                 self.t_print.out(LG + " [>] All done!")
                 win10_notify("Server started!", f"PHP & Ngrok server successfully started on port ({self.def_port})",
                              icon=icons_path + "green_check.ico")
