@@ -90,7 +90,7 @@ Download PHP version 7 from <a href="https://windows.php.net/download#php-7.4">p
 Add php.exe to your pc <code>PATH</code>
 </li>
 <li>
-default port for PHP server & ngrok tunnel is <code>4545</code>, if you want to use a different one, then
+default port for PHP server & ngrok tunnel is <code>4040</code>, if you want to use a different one, then
 Enter <code>python SuperLink.py -p PORT</code> in cmd otherwise Enter <code>python SuperLink.py</code> in cmd
 </li>
 </ol>
