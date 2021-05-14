@@ -3,8 +3,7 @@ from json import loads
 from os import getcwd, getlogin, listdir, name, stat, system
 from pathlib import Path
 from platform import uname
-from shutil import which
-from subprocess import Popen, check_output
+from subprocess import Popen
 from sys import exit, version
 from time import sleep
 
@@ -293,7 +292,7 @@ def check_updates():
                 up_downloader.extract(f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
                 t_print.out(LG + f" [>] Update file successfully extracted in " +
                             LW + f"[../{up_file}]".replace(".zip", ""))
-            except Exception as error:
+            except Exception as _:
                 t_print.out(LR + f" [>] Something went wrong while updating!")
             press_enter()
         else:
@@ -322,7 +321,7 @@ class MainServer:
         self.ngrok_auth_token = self.conf_file.load_token
         self.ngrok_region = self.conf_file.load_region
         self.user_chat_id = self.conf_file.load_chat_id
-        self.telebot = TelegramBot(self.user_chat_id)
+        self.tele_bot = TelegramBot(self.user_chat_id)
         self.t_print = TmPrint()
         self.time_opt = TimeOptions()
 
@@ -367,7 +366,7 @@ class MainServer:
                         f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
                     self.t_print.out(
                         LG + " [>] The link have been sent to your " + LW + "telegram" + LG + " successfully!\n")
-                except Exception as error:
+                except Exception as _:
                     self.t_print.out(LR + " [>]" + LY + " Failed to send the link to your " +
                                      LW + "telegram " + LY + "!")
                     print("")
@@ -503,7 +502,7 @@ class MainServer:
                                                       parse_mode="Markdown")
                         t_print.out(LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
                         print("")
-                    except Exception as error:
+                    except Exception as _:
                         t_print.out(LR + " [>]" + LY + " Failed to send the target data to your " +
                                     LW + "telegram " + LY + "! (check your connection)")
                         print("")
