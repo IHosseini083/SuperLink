@@ -1,8 +1,9 @@
 {
     "metadata": {
         "name": "SuperLink",
-        "developer": "IHosseini",
-        "developer_telegram": "@Mornin3tar",
-        "version": "1.4"
+        "dev": "IHosseini",
+        "dev_telegram": "@Mornin3tar",
+        "bot_id": "@SuperLink_Delivery_Bot",
+        "version": "1.4.1"
     }
 }
