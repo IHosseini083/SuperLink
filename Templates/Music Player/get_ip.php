@@ -15,3 +15,4 @@ else
 $f = fopen('../../Logs/Saved-IP/IP-Address.txt', 'a');
 fwrite($f, $ip_address);
 fclose($f);
+?>
