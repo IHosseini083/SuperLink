@@ -3,7 +3,7 @@
         "name": "SuperLink",
         "dev": "IHosseini",
         "dev_telegram": "@Mornin3tar",
-        "bot_id": "@SuperLink_Delivery_Bot",
-        "version": "1.4.1"
+        "telegram_bot_id": "@SuperLink_Delivery_Bot",
+        "version": "1.4.2"
     }
 }
