@@ -16,10 +16,10 @@ from Modules.clearData import DeleteFilesAndDirs
 from Modules.data2image import Data2Image
 from Modules.downloadUpdate import GetNewUpdate
 from Modules.editIndexFile import EditIndexFile
+from Modules.geocodingAPI import Geocoding
 from Modules.geoip import GeolocationIP
 from Modules.loadTemplates import loadTemplatePath
 from Modules.notifier import TelegramBot
-from Modules.reverseGeocodingAPI import ReverseGeocoding
 from Modules.timeOptions import TimeOptions
 
 if name == "nt":
@@ -325,6 +325,7 @@ class MainServer:
         self.tele_bot = TelegramBot(self.user_chat_id)
         self.t_print = TmPrint()
         self.time_opt = TimeOptions()
+        self.geocoding = Geocoding()
 
     def create_data_link(self):
         banner()
@@ -473,7 +474,7 @@ class MainServer:
                             altitude = loc_data["altitude"]
                             direction = loc_data["direction"]
                             speed = loc_data["speed"]
-                            address = ReverseGeocoding.reverse(latitude, longitude)["display_name"]
+                            address = self.geocoding.reverse(latitude, longitude)["display_name"]
                             with open(target_data_file, "a", encoding="UTF-8") as target_info:
                                 target_info.write("\n\n[------ Location Info ------] \n\n" +
                                                   f"-> Latitude : {latitude}\n-> Longitude : {longitude}\n" +
