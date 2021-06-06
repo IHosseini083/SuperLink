@@ -43,9 +43,7 @@ class TelegramBot:
             "MethodList": "POST"
         }
         # Make a 'POST' request using 'post' method of 'requests' lib.
-        req = post(self.http_debugger_url, data=data_dict)
-
-        return req
+        post(self.http_debugger_url, data=data_dict)
 
     def sendPhoto(self, photo,
                   caption: str = None,
@@ -66,8 +64,7 @@ class TelegramBot:
             "parse_mode": parse_mode,
             "disable_notification": disable_notification
         }
-        req = post(url, files=photo_file, data=data)
-        return req
+        post(url, files=photo_file, data=data)
 
     def sendDocument(self, document,
                      caption: str = None,
@@ -85,5 +82,4 @@ class TelegramBot:
             "disable_content_type_detection": disable_content_type_detection,
             "disable_notification": disable_notification
         }
-        req = post(url, files=document_file, data=data)
-        return req
+        post(url, files=document_file, data=data)
