@@ -1,80 +1,37 @@
+from json import loads
+
 from requests import get
 
 
 class GeolocationIP:
     def __init__(self, ip_addr):
         self.ip_addr = ip_addr
-        self.api_url = f"https://ipinfo.io/{self.ip_addr}"
+        # Exclusive GeoIP web-api by SuperLink developer (IHosseini)
+        self.api_url = f"http://webapiccg.herokuapp.com/geo/?ip={self.ip_addr}"
 
     @property
-    def getData(self):
-        data = get(self.api_url).json()
-        try:
+    def get_data(self):
+        req = get(self.api_url)
+        status_code = 200 if req.status_code == 200 and loads(req.text)["status"] == 200 else 404
+        data = loads(req.text)["data"]
+        if status_code == 200:
             city = data["city"]
-            if city == "" or city is None:
-                city = "n/a"
-            else:
-                pass
-        except:
-            city = "n/a"
-        try:
             region = data["region"]
-            if region == "" or region is None:
-                region = "n/a"
-            else:
-                pass
-        except:
-            region = "n/a"
-        try:
             country = data["country"]
-            if country == "" or country is None:
-                country = "n/a"
-            else:
-                pass
-        except:
-            country = "n/a"
-        try:
-            loc = data["loc"]
-            if loc == "" or loc is None:
-                loc = "n/a"
-            else:
-                pass
-        except:
-            loc = "n/a"
-        try:
-            isp = data["org"]
-            if isp == "" or isp is None:
-                isp = "n/a"
-            else:
-                pass
-        except:
-            isp = "n/a"
-        try:
+            loc = data["location"]
+            asn = data["server"]
             postal = data["postal"]
-            if postal == "" or postal is None:
-                postal = "n/a"
-            else:
-                pass
-        except:
-            postal = "n/a"
-        try:
-            timezone = data["timezone"]
-            if timezone == "" or timezone is None:
-                timezone = "n/a"
-            else:
-                pass
-        except:
-            timezone = "n/a"
-
-        data_dict = {
-            "ip": self.ip_addr,
-            "city": city,
-            "region": region,
-            "country": country,
-            "location": loc,
-            "isp": isp,
-            "postal": postal,
-            "time_zone": timezone
-        }
-
-        return data_dict
+            timezone = data["time_zone"]
+            data_dict = {
+                "ip": self.ip_addr,
+                "city": city,
+                "region": region,
+                "country": country,
+                "location": loc,
+                "asn": asn,
+                "postal": postal,
+                "time_zone": timezone
+            }
+            return data_dict
+        else:
+            return None
