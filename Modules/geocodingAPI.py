@@ -1,3 +1,4 @@
+from json import loads
 from urllib.parse import urljoin
 
 from requests import get
@@ -45,9 +46,9 @@ class Geocoding:
         url = urljoin(self._api_base_url, "/reverse")
         req = get(url, params=params, headers=self._headers)
         if format == "json":
-            return req.json()
+            return loads(req.text)
         else:
-            return req.content
+            return req.text
 
     def forward(self, street: str, city: str,
                 state: str, postal_code: str,
@@ -73,6 +74,6 @@ class Geocoding:
         url = urljoin(self._api_base_url, "/forward")
         req = get(url, params=params, headers=self._headers)
         if format == "json":
-            return req.json()
+            return loads(req.text)
         else:
-            return req.content
+            return req.text
