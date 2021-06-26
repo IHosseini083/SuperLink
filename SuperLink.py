@@ -43,7 +43,7 @@ parser.add_argument("-p", "--port",
                     help="The port for PHP server & ngrok tunnel [ Default : 9090 ]")
 args = parser.parse_args()
 PORT = args.port
-script_version = "1.4.3"
+script_version = "1.4.4"
 script_title = f"SuperLink - v{script_version} - By IHosseini"
 
 
@@ -289,20 +289,20 @@ def check_updates():
                          "please check your network connection.",
                          icon="./Modules/icons/red_cross.ico")
         else:
-            t_print.out(LY + f" [!] There is a new update available! (" +
-                        LR + f"v{updater.new_update}" + LY + ")")
+            t_print.out(LY + " [!] New update available! (" +
+                        LR + f"v{updater.new_update[0]}" + LY + f") #{updater.new_update[1]}")
             win10_notify("New update available!",
-                         f"A new update released on github by the author\nnew version: {updater.new_update}",
+                         f"A new update released on github by the author\nnew version: {updater.new_update[0]}",
                          icon="./Modules/icons/exclamation_mark.ico")
-            up_file = f"SuperLink-v{updater.new_update}.zip"
+            up_file = f"SuperLink-v{updater.new_update[0]}.zip"
             select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
-                                LB + f" Do you want to download the new version ({updater.new_update}) ? [y/n] " +
+                                LB + f" Do you want to download the new version ({updater.new_update[0]}) ? [y/n] " +
                                 LW + "").lower()
             if select_down == "y" or select_down == "yes":
                 banner()
                 print("\n\n")
                 t_print.out(
-                    LG + f" [>] Downloading new version ({updater.new_update}) ...")
+                    LG + f" [>] Downloading new version ({updater.new_update[0]}) ...")
                 try:
                     up_downloader.download(f"../{up_file}")
                     t_print.out(LG + f" [>] Downloaded successfully!")
