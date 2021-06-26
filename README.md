@@ -59,9 +59,9 @@ from [here](https://t.me/userinfobot).
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
 sudo ./linux_installer
-default port for PHP server & ngrok tunnel is 4040,
+default port for PHP server & ngrok tunnel is 9090,
 if you want to use a different one, then:
-    - sudo python SuperLink.py -p PORT
+    - sudo python3 SuperLink.py -p PORT
 otherwise:
     - sudo python3 SuperLink.py
 ```
@@ -91,7 +91,7 @@ Download PHP version 7+ from <a href="https://windows.php.net/download">php.net<
 Add php.exe to your pc <code>PATH</code>
 </li>
 <li>
-default port for PHP server & ngrok tunnel is <code>4040</code>, if you want to use a different one, then
+default port for PHP server & ngrok tunnel is <code>9090</code>, if you want to use a different one, then
 Enter <code>python SuperLink.py -p PORT</code> in cmd otherwise Enter <code>python SuperLink.py</code> in cmd
 </li>
 </ol>
