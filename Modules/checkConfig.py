@@ -22,14 +22,10 @@ class CheckConfigFile:
             else:
                 if self.load_token == "":
                     self.update_config_file("ngrok", {"token": self.get_token})
-                else:
-                    if self.load_chat_id == "":
-                        self.update_config_file("telegram", {"chat_id": self.get_chat_id})
-                    else:
-                        if self.load_region == "":
-                            self.update_config_file("ngrok", {"region": "us"})
-                        else:
-                            pass
+                elif self.load_chat_id == "":
+                    self.update_config_file("telegram", {"chat_id": self.get_chat_id})
+                elif self.load_region == "":
+                    self.update_config_file("ngrok", {"region": "us"})
         else:
             self.create_configfile()
 
