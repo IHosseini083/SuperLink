@@ -39,8 +39,8 @@ Y = Fore.YELLOW  # yellow
 
 parser = ArgumentParser()
 parser.add_argument("-p", "--port",
-                    type=int, default=4040,
-                    help="The port for PHP server & ngrok tunnel [ Default : 4545 ]")
+                    type=int, default=9090,
+                    help="The port for PHP server & ngrok tunnel [ Default : 9090 ]")
 args = parser.parse_args()
 PORT = args.port
 script_version = "1.4.3"
