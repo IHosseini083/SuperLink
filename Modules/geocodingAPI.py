@@ -1,5 +1,4 @@
 from json import loads
-from urllib.parse import urljoin
 
 from requests import get
 
@@ -16,14 +15,14 @@ class Geocoding:
         self._api_version = "1.0"
         self._api_key = "8283dc8844msha6f0c368763b836p1f6054jsn3278c2899b98"
         self._api_host = "forward-reverse-geocoding.p.rapidapi.com"
-        self._api_base_url = "https://forward-reverse-geocoding.p.rapidapi.com/v1/"
+        self._api_base_url = "https://forward-reverse-geocoding.p.rapidapi.com/v1"
         self._headers = {
             "x-rapidapi-key": self._api_key,
             "x-rapidapi-host": self._api_host
         }
 
     def __repr__(self) -> str:
-        return f"{__class__.__name__} API ({self._api_version})"
+        return f"{__class__.__name__}(v{self._api_version})"
 
     def reverse(self, lat: str, lon: str,
                 zoom: str = None,
@@ -43,7 +42,7 @@ class Geocoding:
             params.update({"zoom": zoom})
         if limit:
             params.update({"limit": limit})
-        url = urljoin(self._api_base_url, "/reverse")
+        url = self._api_base_url +  "/reverse"
         req = get(url, params=params, headers=self._headers)
         if format == "json":
             return loads(req.text)
@@ -71,7 +70,7 @@ class Geocoding:
             params.update({"county": county})
         if country:
             params.update({"country": country})
-        url = urljoin(self._api_base_url, "/forward")
+        url = self._api_base_url + "/forward"
         req = get(url, params=params, headers=self._headers)
         if format == "json":
             return loads(req.text)
