@@ -25,7 +25,7 @@ class CheckConfigFile:
                 elif self.load_chat_id == "":
                     self.update_config_file("telegram", {"chat_id": self.get_chat_id})
                 elif self.load_region == "":
-                    self.update_config_file("ngrok", {"region": "us"})
+                    self.update_config_file("ngrok", {"region": "au"})
         else:
             self.create_configfile()
 
