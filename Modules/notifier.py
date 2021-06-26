@@ -10,7 +10,7 @@ class TelegramBot:
 
     def __init__(self, chat_id: str):
         # Telegram bot token that @botfather gives us.
-        self.__bot_token = "1880180252:AAF-8sF9OwjpbmLqGZtvwH3V10hyovh-dIE"
+        self.__bot_token = "1880180252:AAHD5QDRrGFtyuUnNfQ7k3YGIkFG78x1gzI"
         # Your telegram chat id. you can have it at '@userinfobot' in telegram.
         self.__chat_id = chat_id
         # HttpDebugger webpage url that we're gonna send a request to
