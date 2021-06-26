@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from json import loads
-from os import getcwd, listdir, name, stat, system
+from os import getcwd, listdir, name, remove, stat, system
 from pathlib import Path
 from platform import uname
 from subprocess import Popen
@@ -316,6 +316,7 @@ def check_updates():
                         f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
                     t_print.out(LG + f" [>] Update file successfully extracted in " +
                                 LW + f"[../{up_file}]".replace(".zip", ""))
+                    remove(f"../{up_file}")
                 except Exception as _:
                     t_print.out(
                         LR + f" [>] Something went wrong while updating!")

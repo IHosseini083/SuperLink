@@ -14,6 +14,7 @@ class CheckUpdates:
             req = get(ver_url).text
             req = loads(req)
             github_ver = req["metadata"]["version"]
+            github_changelog = req["metadata"]["changelog"]
             str_github_ver = str(github_ver).replace(".", "")
             str_current_ver = str(self.get_info[0]).replace(".", "")
             changelog = self.get_info[1]
@@ -21,7 +22,7 @@ class CheckUpdates:
                 if int(str_github_ver) < int(str_current_ver):
                     return False
                 else:
-                    return github_ver, changelog
+                    return github_ver, github_changelog
             else:
                 return False
         except Exception:
