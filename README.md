@@ -1,8 +1,12 @@
 # SuperLink (Social Engineering Tool)
 
+![GitHub SuperLink Size](https://img.shields.io/github/repo-size/IHosseini083/SuperLink?logoColor=red)
+![GitHub License](https://img.shields.io/github/license/IHosseini083/SuperLink)
+
 ## Changelogs
 
 - v1.4.4: minor bugs and issues fixed
+- v1.4.5: add map maker for target's location
 
 ## About SuperLink
 
@@ -17,6 +21,7 @@ you'll have :
 - Altitude - Not always available
 - Direction - Only available if user is moving
 - Speed - Only available if user is moving
+- Reverse geocoding for target's longitude, latitude
 
 Along with Location Information it also gets Device Information without any permissions :
 
@@ -102,8 +107,8 @@ Enter <code>python SuperLink.py -p PORT</code> in cmd otherwise Enter <code>pyth
 
 ## Screenshots
 
-![SuperLink V1.3](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.3")
+![SuperLink V1.4.5](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.4.5")
 
 ---
 
-![SuperLink V1.3](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink version 1.3")
+![SuperLink V1.4.5](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink version 1.4.5")

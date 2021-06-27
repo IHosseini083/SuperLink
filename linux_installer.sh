@@ -6,8 +6,6 @@ echo ' [>] Installing Python3'
 apt-get -y install python3 python3-pip
 echo ' [>] Installing PHP'
 apt-get -y install php
-echo ' [>] Installing Neofetch'
-apt-get -y install neofetch
 echo ' [>] Installing Requests'
 pip3 install requests
 echo ' [>] Installing Colorama'
