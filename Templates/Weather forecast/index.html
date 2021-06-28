@@ -4,17 +4,22 @@
 
     <meta charset="UTF-8">
 
-    <link href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" rel="apple-touch-icon" type="image/png">
+    <link href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+          rel="apple-touch-icon" type="image/png">
     <meta content="CodePen" name="apple-mobile-web-app-title">
 
     <link href="./img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
-    <link color="#111" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" rel="mask-icon" type=""> li
-    <link rel="stylesheet" href="./css/styles.css">
+    <link color="#111"
+          href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+          rel="mask-icon" type="">
+    li
+    <link href="./css/styles.css" rel="stylesheet">
     <title>Weather Details</title>
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
-        window.console = window.console || function(t) {};
+        window.console = window.console || function (t) {
+        };
     </script>
 
 
@@ -30,112 +35,124 @@
 </head>
 
 <body onload="information()" translate="no">
-    <div class="container">
-        <div class="weather-side">
-            <div class="weather-gradient"></div>
-            <div class="date-container">
-                <h2 class="date-dayname">Tuesday</h2><span class="date-day">18 May 2021</span>
-                <svg class="feather feather-map-pin location-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<div class="container">
+    <div class="weather-side">
+        <div class="weather-gradient"></div>
+        <div class="date-container">
+            <h2 class="date-dayname">Tuesday</h2><span class="date-day">18 May 2021</span>
+            <svg class="feather feather-map-pin location-icon" fill="none" height="24" stroke="currentColor"
+                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="location">New York, USA</span>
+        </div>
+        <div class="weather-container">
+            <svg class="feather feather-sun weather-icon" fill="none" height="24" stroke="currentColor"
+                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" x2="12" y1="1" y2="3"></line>
+                <line x1="12" x2="12" y1="21" y2="23"></line>
+                <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+                <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+                <line x1="1" x2="3" y1="12" y2="12"></line>
+                <line x1="21" x2="23" y1="12" y2="12"></line>
+                <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+                <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+            </svg>
+            <h1 class="weather-temp">26°C</h1>
+            <h3 class="weather-desc">Sunny</h3>
+        </div>
+    </div>
+    <div class="info-side">
+        <div class="today-info-container">
+            <div class="today-info">
+                <div class="precipitation"><span class="title">PRECIPITATION</span><span class="value">5 %</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="humidity"><span class="title">HUMIDITY</span><span class="value">15 %</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="wind"><span class="title">WIND</span><span class="value">4 km/h</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="week-container">
+            <ul class="week-list">
+                <li class="active">
+                    <svg class="feather feather-sun day-icon" fill="none" height="24" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" x2="12" y1="1" y2="3"></line>
+                        <line x1="12" x2="12" y1="21" y2="23"></line>
+                        <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
+                        <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
+                        <line x1="1" x2="3" y1="12" y2="12"></line>
+                        <line x1="21" x2="23" y1="12" y2="12"></line>
+                        <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
+                        <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
+                    </svg>
+                    <span class="day-name">Tue</span><span class="day-temp">26°C</span>
+                </li>
+                <li>
+                    <svg class="feather feather-cloud day-icon" fill="none" height="24" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                    </svg>
+                    <span class="day-name">Wed</span><span class="day-temp">21°C</span>
+                </li>
+                <li>
+                    <svg class="feather feather-cloud-snow day-icon" fill="none" height="24" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"></path>
+                        <line x1="8" x2="8.01" y1="16" y2="16"></line>
+                        <line x1="8" x2="8.01" y1="20" y2="20"></line>
+                        <line x1="12" x2="12.01" y1="18" y2="18"></line>
+                        <line x1="12" x2="12.01" y1="22" y2="22"></line>
+                        <line x1="16" x2="16.01" y1="16" y2="16"></line>
+                        <line x1="16" x2="16.01" y1="20" y2="20"></line>
+                    </svg>
+                    <span class="day-name">Thu</span><span class="day-temp">08°C</span>
+                </li>
+                <li>
+                    <svg class="feather feather-cloud-rain day-icon" fill="none" height="24" stroke="currentColor"
+                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <line x1="16" x2="16" y1="13" y2="21"></line>
+                        <line x1="8" x2="8" y1="13" y2="21"></line>
+                        <line x1="12" x2="12" y1="15" y2="23"></line>
+                        <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path>
+                    </svg>
+                    <span class="day-name">Fri</span><span class="day-temp">19°C</span>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="location-container">
+            <button class="location-button" onclick="locationData()">
+                <svg class="feather feather-map-pin" fill="none" height="24" stroke="currentColor"
+                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                     xmlns="http://www.w3.org/2000/svg">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                     <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span class="location">New York, USA</span>
-            </div>
-            <div class="weather-container">
-                <svg class="feather feather-sun weather-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" x2="12" y1="1" y2="3"></line>
-                    <line x1="12" x2="12" y1="21" y2="23"></line>
-                    <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
-                    <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
-                    <line x1="1" x2="3" y1="12" y2="12"></line>
-                    <line x1="21" x2="23" y1="12" y2="12"></line>
-                    <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
-                    <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
-                </svg>
-                <h1 class="weather-temp">26°C</h1>
-                <h3 class="weather-desc">Sunny</h3>
-            </div>
-        </div>
-        <div class="info-side">
-            <div class="today-info-container">
-                <div class="today-info">
-                    <div class="precipitation"><span class="title">PRECIPITATION</span><span class="value">5 %</span>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="humidity"><span class="title">HUMIDITY</span><span class="value">15 %</span>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="wind"><span class="title">WIND</span><span class="value">4 km/h</span>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="week-container">
-                <ul class="week-list">
-                    <li class="active">
-                        <svg class="feather feather-sun day-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="5"></circle>
-                            <line x1="12" x2="12" y1="1" y2="3"></line>
-                            <line x1="12" x2="12" y1="21" y2="23"></line>
-                            <line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line>
-                            <line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line>
-                            <line x1="1" x2="3" y1="12" y2="12"></line>
-                            <line x1="21" x2="23" y1="12" y2="12"></line>
-                            <line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line>
-                            <line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line>
-                        </svg>
-                        <span class="day-name">Tue</span><span class="day-temp">26°C</span>
-                    </li>
-                    <li>
-                        <svg class="feather feather-cloud day-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
-                        </svg>
-                        <span class="day-name">Wed</span><span class="day-temp">21°C</span>
-                    </li>
-                    <li>
-                        <svg class="feather feather-cloud-snow day-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"></path>
-                            <line x1="8" x2="8.01" y1="16" y2="16"></line>
-                            <line x1="8" x2="8.01" y1="20" y2="20"></line>
-                            <line x1="12" x2="12.01" y1="18" y2="18"></line>
-                            <line x1="12" x2="12.01" y1="22" y2="22"></line>
-                            <line x1="16" x2="16.01" y1="16" y2="16"></line>
-                            <line x1="16" x2="16.01" y1="20" y2="20"></line>
-                        </svg>
-                        <span class="day-name">Thu</span><span class="day-temp">08°C</span>
-                    </li>
-                    <li>
-                        <svg class="feather feather-cloud-rain day-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="16" x2="16" y1="13" y2="21"></line>
-                            <line x1="8" x2="8" y1="13" y2="21"></line>
-                            <line x1="12" x2="12" y1="15" y2="23"></line>
-                            <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"></path>
-                        </svg>
-                        <span class="day-name">Fri</span><span class="day-temp">19°C</span>
-                    </li>
-                    <div class="clear"></div>
-                </ul>
-            </div>
-            <div class="location-container">
-                <button class="location-button" onclick="locationData()">
-                    <svg class="feather feather-map-pin" fill="none" height="24" stroke="currentColor"
-                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                    <span>Change the location</span></button>
-            </div>
+                <span>Change the location</span></button>
         </div>
     </div>
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+</div>
+<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
 
 
-    <script id="rendered-js">
-        feather.replace();
-        //# sourceURL=pen.js
-    </script>
+<script id="rendered-js">
+    feather.replace();
+    //# sourceURL=pen.js
+</script>
 </body>
 
 </html>

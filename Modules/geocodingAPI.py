@@ -42,7 +42,7 @@ class Geocoding:
             params.update({"zoom": zoom})
         if limit:
             params.update({"limit": limit})
-        url = self._api_base_url +  "/reverse"
+        url = self._api_base_url + "/reverse"
         req = get(url, params=params, headers=self._headers)
         if format == "json":
             return loads(req.text)

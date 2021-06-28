@@ -1,10 +1,10 @@
 {
-    "metadata": {
-        "name": "SuperLink",
-        "dev": "IHosseini",
-        "dev_telegram": "@Mornin3tar",
-        "telegram_bot_id": "@SuperLink_Delivery_Bot",
-        "version": "1.4.5",
-        "changelog": "add map maker for target's location"
-    }
+  "metadata": {
+    "name": "SuperLink",
+    "dev": "IHosseini",
+    "dev_telegram": "@Mornin3tar",
+    "telegram_bot_id": "@SuperLink_Delivery_Bot",
+    "version": "1.4.5",
+    "changelog": "add map maker for target's location"
+  }
 }
