@@ -57,7 +57,7 @@ args = parser.parse_args()
 PORT = args.port
 
 __author__ = "IHosseini"
-__version__ = "1.4.4"
+__version__ = "1.4.5"
 
 script_title = f"SuperLink - v{__version__} - By {__author__}"
 
