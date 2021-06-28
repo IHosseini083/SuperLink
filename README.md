@@ -1,7 +1,10 @@
 # SuperLink (Social Engineering Tool)
 
-![GitHub SuperLink Size](https://img.shields.io/github/repo-size/IHosseini083/SuperLink?logoColor=red)
-![GitHub License](https://img.shields.io/github/license/IHosseini083/SuperLink)
+![GitHub SuperLink Size](https://img.shields.io/github/repo-size/IHosseini083/SuperLink?logoColor=red "SuperLink Size")
+![GitHub License](https://img.shields.io/github/license/IHosseini083/SuperLink "License")
+![Python Version](https://img.shields.io/badge/Python-3.8%2B-yellow "Python Version")
+![PHP Version](https://img.shields.io/badge/PHP-7%2B-purple "PHP Version")
+![Platform](https://img.shields.io/badge/Platform-Windows%2010%20|%20Linux-orange "Platform")
 
 ## Changelogs
 
@@ -12,7 +15,7 @@
 
 SuperLink will host a fake website using PHP server & [Ngrok](https://ngrok.com)
 and generates a link when target opens the generated link, it will request for some permissions then if it gets them,
-you'll have :
+you'll have:
 
 - Access to target's webcam
 - Longitude
@@ -59,8 +62,8 @@ Note!: First, go to [ngrok website](https://ngrok.com) and signup, then login an
 to [here](https://dashboard.ngrok.com/get-started/your-authtoken)
 and copy your ngrok authentication token. In the first time that you run the script it will prompt you for your ngrok
 authentication token, and your telegram chat id, so the script can send the generated links to your telegram account,
-but you must start the [@SuperLink_Delivery_Bot](http://t.me/SuperLink_Delivery_Bot) bot at first, so it can send you messages. you can have your chat id
-from [here](https://t.me/userinfobot).
+but you must start the [@SuperLink_Delivery_Bot](http://t.me/SuperLink_Delivery_Bot) bot at first, so it can send you
+messages. you can have your chat id from [here](https://t.me/userinfobot).
 
 **Kali Linux / Ubuntu / Parrot OS**:
 
@@ -68,11 +71,19 @@ from [here](https://t.me/userinfobot).
 git clone https://github.com/IHosseini083/SuperLink.git
 cd SuperLink
 sudo ./linux_installer
-default port for PHP server & ngrok tunnel is 9090,
+```
+
+default port for **PHP** server & **ngrok** tunnel is `9090`,
 if you want to use a different one, then:
-    - sudo python3 SuperLink.py -p PORT
+
+```bash
+sudo python3 SuperLink.py -p PORT
+```
+
 otherwise:
-    - sudo python3 SuperLink.py
+
+```bash
+sudo python3 SuperLink.py
 ```
 
 **Windows**:
@@ -107,8 +118,8 @@ Enter <code>python SuperLink.py -p PORT</code> in cmd otherwise Enter <code>pyth
 
 ## Screenshots
 
-![SuperLink V1.4.5](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink version 1.4.5")
+![SuperLink v1.4.5](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss1.png "SuperLink v1.4.5")
 
 ---
 
-![SuperLink V1.4.5](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink version 1.4.5")
+![SuperLink v1.4.5](https://github.com/IHosseini083/SuperLink/blob/main/ss/ss2.png "SuperLink v1.4.5")
