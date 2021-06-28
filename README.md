@@ -1,5 +1,6 @@
 # SuperLink (Social Engineering Tool)
 
+![SuperLink Version](https://img.shields.io/badge/SuperLink-v1.4.5-green "SuperLink Version")
 ![GitHub SuperLink Size](https://img.shields.io/github/repo-size/IHosseini083/SuperLink?logoColor=red "SuperLink Size")
 ![GitHub License](https://img.shields.io/github/license/IHosseini083/SuperLink "License")
 ![Python Version](https://img.shields.io/badge/Python-3.8%2B-yellow "Python Version")
