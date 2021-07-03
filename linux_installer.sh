@@ -18,6 +18,8 @@ echo ' [>] Installing Zipfile36'
 pip3 install zipfile36
 echo ' [>] Installing Argparse'
 pip3 install argparse
+echo ' [>] Installing Folium'
+pip3 install folium
 echo ' [>] Setting Permissions...'
 chmod 777 Templates
 chmod 777 Logs
