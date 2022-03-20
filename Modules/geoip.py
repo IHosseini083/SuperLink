@@ -22,7 +22,7 @@ class GeolocationIP:
             asn = data["server"]
             postal = data["postal"]
             timezone = data["time_zone"]
-            data_dict = {
+            return {
                 "ip": self.ip_addr,
                 "city": city,
                 "region": region,
@@ -32,6 +32,5 @@ class GeolocationIP:
                 "postal": postal,
                 "time_zone": timezone
             }
-            return data_dict
         else:
             return None

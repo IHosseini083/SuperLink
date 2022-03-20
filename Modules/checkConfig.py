@@ -19,13 +19,12 @@ class CheckConfigFile:
         if path.exists(self.config_file) is True:
             if stat(self.config_file).st_size == 0:
                 self.create_configfile()
-            else:
-                if self.load_token == "":
-                    self.update_config_file("ngrok", {"token": self.get_token})
-                elif self.load_chat_id == "":
-                    self.update_config_file("telegram", {"chat_id": self.get_chat_id})
-                elif self.load_region == "":
-                    self.update_config_file("ngrok", {"region": "au"})
+            elif self.load_token == "":
+                self.update_config_file("ngrok", {"token": self.get_token})
+            elif self.load_chat_id == "":
+                self.update_config_file("telegram", {"chat_id": self.get_chat_id})
+            elif self.load_region == "":
+                self.update_config_file("ngrok", {"region": "au"})
         else:
             self.create_configfile()
 
@@ -56,11 +55,10 @@ class CheckConfigFile:
     @property
     def get_chat_id(self):
         tg_chat_id = input(Y + "\n [!] Please enter your 'telegram chat id' (find it here @userinfobot) : " + LW + "")
-        if tg_chat_id == "":
-            print(LR + "\n [!] Chat id was not received!")
-            exit()
-        else:
+        if tg_chat_id != "":
             return tg_chat_id
+        print(LR + "\n [!] Chat id was not received!")
+        exit()
 
     def create_configfile(self):
         data_dict = {
@@ -78,15 +76,12 @@ class CheckConfigFile:
 
     @property
     def load_token(self):
-        token = self.load_conf_file("ngrok", "token")
-        return token
+        return self.load_conf_file("ngrok", "token")
 
     @property
     def load_chat_id(self):
-        chat_id = self.load_conf_file("telegram", "chat_id")
-        return chat_id
+        return self.load_conf_file("telegram", "chat_id")
 
     @property
     def load_region(self):
-        region = self.load_conf_file("ngrok", "region")
-        return region
+        return self.load_conf_file("ngrok", "region")

