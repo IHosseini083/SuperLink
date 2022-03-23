@@ -8,8 +8,6 @@ class GetNewUpdate:
         self.update_link = update_link
         if self.update_link is None:
             self.update_link = "https://github.com/IHosseini083/SuperLink/archive/refs/heads/main.zip"
-        else:
-            pass
 
     def download(self, filename):
         req = get(self.update_link)

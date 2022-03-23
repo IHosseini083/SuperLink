@@ -39,15 +39,12 @@ class Geocoding:
             "polygon_threshold": "0.0"
         }
         if zoom:
-            params.update({"zoom": zoom})
+            params["zoom"] = zoom
         if limit:
-            params.update({"limit": limit})
-        url = self._api_base_url + "/reverse"
+            params["limit"] = limit
+        url = f'{self._api_base_url}/reverse'
         req = get(url, params=params, headers=self._headers)
-        if format == "json":
-            return loads(req.text)
-        else:
-            return req.text
+        return loads(req.text) if format == "json" else req.text
 
     def forward(self, street: str, city: str,
                 state: str, postal_code: str,
@@ -67,12 +64,9 @@ class Geocoding:
             "polygon_threshold": "0.0"
         }
         if county:
-            params.update({"county": county})
+            params["county"] = county
         if country:
-            params.update({"country": country})
-        url = self._api_base_url + "/forward"
+            params["country"] = country
+        url = f'{self._api_base_url}/forward'
         req = get(url, params=params, headers=self._headers)
-        if format == "json":
-            return loads(req.text)
-        else:
-            return req.text
+        return loads(req.text) if format == "json" else req.text

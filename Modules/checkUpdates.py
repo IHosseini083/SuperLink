@@ -18,13 +18,14 @@ class CheckUpdates:
             str_github_ver = str(github_ver).replace(".", "")
             str_current_ver = str(self.get_info[0]).replace(".", "")
             changelog = self.get_info[1]
-            if github_ver != self.get_info[0]:
-                if int(str_github_ver) < int(str_current_ver):
-                    return False
-                else:
-                    return github_ver, github_changelog
-            else:
+            if (
+                github_ver != self.get_info[0]
+                and int(str_github_ver) < int(str_current_ver)
+                or github_ver == self.get_info[0]
+            ):
                 return False
+            else:
+                return github_ver, github_changelog
         except Exception:
             return None
 

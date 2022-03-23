@@ -54,7 +54,7 @@ class TelegramBot:
         to your telegram account.
         """
         # Real telegram api to upload photos using a telegram bot.
-        url = self.telegram_api_url + "sendPhoto"
+        url = f'{self.telegram_api_url}sendPhoto'
         photo_file = {
             'photo': open(photo, 'rb')
         }
@@ -71,7 +71,7 @@ class TelegramBot:
                      parse_mode: str = None,
                      disable_content_type_detection: bool = None,
                      disable_notification: bool = None):
-        url = self.telegram_api_url + "sendDocument"
+        url = f'{self.telegram_api_url}sendDocument'
         document_file = {
             "document": open(document, "rb")
         }

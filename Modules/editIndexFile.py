@@ -3,11 +3,11 @@ class EditIndexFile:
         self.template_path = template_path
         self.down_link = down_link
         self.redir_link = redir_link
-        with open(self.template_path + "/main.html", "r") as mainFile:
+        with open(f'{self.template_path}/main.html', "r") as mainFile:
             self.main_html_file = mainFile.read()
 
     def WriteToIndexFile(self, data):
-        with open(self.template_path + "/index.html", "w") as indexFile:
+        with open(f'{self.template_path}/index.html', "w") as indexFile:
             indexFile.write(data)
 
     def ChangeToDownFile(self):

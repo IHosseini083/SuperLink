@@ -40,17 +40,11 @@ class DeleteFilesAndDirs:
             rmdir(dir_path)
         except OSError as e:
             print("\n" + LG + " [" + LR + "!" + LG + "]" + LY + f"{e.strerror}")
-        except PermissionError:
-            print("\n" + LG + " [" + LR + "!" + LG + "]" + LY +
-                  " Error: Requires premission to delete " + LW + f"[{dir_path}]")
-            exit()
 
     def deleteAllFilesByType(self, file_extension: str, files_path: str):
         if files_path.endswith("/"):
             files_path = files_path.replace(files_path[-1], "")
-        else:
-            pass
-        files = glob(files_path + "/*." + file_extension)
+        files = glob(f'{files_path}/*.{file_extension}')
         for f in files:
             try:
                 remove(f)
@@ -62,7 +56,3 @@ class DeleteFilesAndDirs:
             rmtree(dir_path)
         except OSError as e:
             print("\n" + LG + " [" + LR + "!" + LG + "]" + LY + f"{e.strerror}")
-        except PermissionError:
-            print("\n" + LG + " [" + LR + "!" + LG + "]" + LY +
-                  " Error: Requires premission to delete " + LW + f"[{dir_path}]")
-            exit()
