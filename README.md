@@ -7,6 +7,13 @@
 ![PHP Version](https://img.shields.io/badge/PHP-7%2B-purple "PHP Version")
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%20|%20Linux-orange "Platform")
 
+## NOTICE!
+
+This repository has been archived due to low quality of its python code!
+
+When I built this python script, It was just about a year since I started programming in python and I was not quite familiar with pythonic way of doing things or
+best practice solutions for different situations and clearly I have delivered a low quality code to the community that now even I get dizzy when I look at my masterpiece :)
+
 ## Changelogs
 
 - v1.4.4: minor bugs and issues fixed
